@@ -38,7 +38,7 @@ router.post("/user/login", (req, resp)=>{
       // 获取登录用户对象
       let user = result[0]
       // 为该用户颁发一个token字符串，未来该客户端若做发送其他请求，则需要在请求Header中携带token，完成状态管理。
-      let payload = {id: user.id, nickname: user.nickname}
+      let payload = {id: user.id, username: user.username}
       let token = jwt.sign(payload, SECRET_KEY, {expiresIn: '1d'})
       // 返回user对象与token字符串
       user.password = undefined

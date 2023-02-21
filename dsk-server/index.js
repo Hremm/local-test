@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = 3010; // 服务端口
+const port = 3060; // 服务端口
 
 const jwt = require("jsonwebtoken");
 const JWT_SECRET_KEY = "JWT_SECRET_KEY";
@@ -49,13 +49,6 @@ app.use(tokenTools);
 
 
 // 引入外部路由
-app.use(require("./router/MovieActor.js"));
-app.use(require("./router/MovieDirector.js"));
-app.use(require("./router/MovieInfo.js"));
-app.use(require("./router/MovieThumb.js"));
-app.use(require("./router/Cinema.js"));
-app.use(require("./router/CinemaRoom.js"));
-app.use(require("./router/ShowingonPlan.js"));
 app.use(require("./router/Admin.js"));
 
 /**
