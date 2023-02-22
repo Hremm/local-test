@@ -50,6 +50,7 @@ app.use(tokenTools);
 
 // 引入外部路由
 app.use(require("./router/Admin.js"));
+app.use(require("./router/BookAuthor.js"))
 
 /**
  * 接口， 处理/请求
