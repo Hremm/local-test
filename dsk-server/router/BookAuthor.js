@@ -47,12 +47,12 @@ router.post("/book_author/del", (req, resp) => {
  *   {code:200, msg:'ok'}
  */
 router.post("/book_author/add", (req, resp) => {
-  let { authorName, authorAvatar } = req.body; // post请求参数在req.body中
+  let { author_name, author_avatar } = req.body; // post请求参数在req.body中
 
   // 表单验证
   let schema = Joi.object({
-    authorName: Joi.string().required(), // 必填
-    authorAvatar: Joi.string().required(), // 必填
+    author_name: Joi.string().required(), // 必填
+    author_avatar: Joi.string().required(), // 必填
   });
   let { error, value } = schema.validate(req.body);
   if (error) {
@@ -62,7 +62,7 @@ router.post("/book_author/add", (req, resp) => {
 
   // 表单验证通过，执行添加操作
   let sql = "insert into book_author (author_name, author_avatar) values (?,?)";
-  pool.query(sql, [authorName, authorAvatar], (error, result) => {
+  pool.query(sql, [author_name, author_avatar], (error, result) => {
     if (error) {
       resp.send(Response.error(500, error));
       throw error;
