@@ -13,9 +13,12 @@
 
  Date: 24/02/2023 21:05:33
 */
+<<<<<<< HEAD
 DROP DATABASE IF EXISTS `dushuke`;
 CREATE DATABASE `dushuke` DEFAULT CHARSET UTF8;
 USE `dushuke`;
+=======
+>>>>>>> 45b6fdde9ee05050b2983a281c14dc826313dc2a
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
@@ -79,6 +82,10 @@ CREATE TABLE `book_details`  (
 -- Records of book_details
 -- ----------------------------
 INSERT INTO `book_details` VALUES (1, NULL, 'https://s1.ax1x.com/2023/02/24/pSzHgMT.jpg', '活了一百万次的猫', '漫画绘本', '佐野洋子', '2004-10', '9.2', '有一只100万年也不死的猫。\r\n其实猫死了100万次，又活了100万次。\r\n是一只漂亮的虎斑猫。 有100万个人宠爱过这只猫，有100万个人在这只猫死的时候哭过。\r\n可是猫连一次也没有哭过。\r\n有一回，猫是国王的猫。\r\n猫讨厌什么国王。\r\n国王爱打仗，总是发动战争。而且，他还把猫用一个漂亮的篮子装起来，带到战场上。有一天，猫被一支飞来的箭射死了。\r\n正打着仗，国王却抱着猫哭了起来。\r\n国王仗也不打了，回到了王宫，然后，把猫埋到了王宫的院子里。\r\n有一回，猫是水手的猫。');
+<<<<<<< HEAD
+=======
+
+>>>>>>> 45b6fdde9ee05050b2983a281c14dc826313dc2a
 -- ----------------------------
 -- Table structure for book_store
 -- ----------------------------

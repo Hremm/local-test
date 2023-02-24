@@ -1,5 +1,8 @@
 /**  定义图书详情相关的接口 */
+<<<<<<< HEAD
 // 添加图书,查询图书类型,通过类别id查询图书,查询所有图书,模糊查询图书,通过id查询图书,删除图书,修改图书信息
+=======
+>>>>>>> 45b6fdde9ee05050b2983a281c14dc826313dc2a
 const express = require("express");
 const router = express.Router();
 const Joi = require("joi");
@@ -68,7 +71,19 @@ router.post("/book_details/add", (req, resp) => {
       if (error) {
         resp.send(Response.error(500, error));
         throw error;
+<<<<<<< HEAD
       } else {
+=======
+      }
+      // 获取当前添加图书的ID，并新增book_desc表
+      let insertId = result.insertId
+      let sql2 = 'insert into movie_desc (bid, description) values (?, ?)';
+      pool.query(sql2, [insertId, description], (error2, result2) => {
+        if (error2) {
+          resp.send(Response.error(500, error2));
+          throw error2;
+        }
+>>>>>>> 45b6fdde9ee05050b2983a281c14dc826313dc2a
         resp.send(Response.ok());
       }
       // 获取当前添加图书的ID，并新增book_desc表
@@ -110,7 +125,11 @@ router.get("/book_type", (req, resp) => {
  * @return:
  *   {code:200, msg:'ok', data:[]}
  */
+<<<<<<< HEAD
 router.get("/book_details/type", async (req, resp) => {
+=======
+ router.get("/book_details/type", async (req, resp) => {
+>>>>>>> 45b6fdde9ee05050b2983a281c14dc826313dc2a
   // 获取请求参数   get请求的参数封装在req.query中
   let { page, pagesize, id } = req.query;
 
