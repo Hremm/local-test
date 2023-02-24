@@ -1,4 +1,4 @@
-/**  定义电影演员相关的接口 */
+/**  定义图书详情相关的接口 */
 const express = require("express");
 const router = express.Router();
 const Joi = require("joi");
@@ -8,7 +8,7 @@ const Response = require("../utils/Response.js");
 const pool = require("../utils/db.js");
 
 /**
- * 添加电影接口
+ * 添加图书接口
  * @param:
  *   详见接口文档
  * @return:
@@ -16,7 +16,7 @@ const pool = require("../utils/db.js");
  */
 router.post("/book_details/add", (req, resp) => {
   let {
-
+    type_id,
     cover,
     title,
     type,
@@ -68,9 +68,9 @@ router.post("/book_details/add", (req, resp) => {
         resp.send(Response.error(500, error));
         throw error;
       }
-      // 获取当前添加图书的ID，并新增movie_desc表
+      // 获取当前添加图书的ID，并新增book_desc表
       let insertId = result.insertId
-      let sql2 = 'insert into movie_desc (movieid, description) values (?, ?)';
+      let sql2 = 'insert into movie_desc (bid, description) values (?, ?)';
       pool.query(sql2, [insertId, description], (error2, result2) => {
         if (error2) {
           resp.send(Response.error(500, error2));
@@ -83,14 +83,14 @@ router.post("/book_details/add", (req, resp) => {
 });
 
 /**
- * 查询所有的电影类型
+ * 查询所有的图书类型
  * @param:
  *   详见接口文档
  * @return:
  *   {code:200, msg:'ok', data:[]}
  */
-router.get("/movie-types", (req, resp) => {
-  let sql = "select * from movie_type";
+router.get("/book_type", (req, resp) => {
+  let sql = "select * from book_type";
   pool.query(sql, (error, result) => {
     if (error) {
       resp.send(Response.error(500, error));
@@ -101,19 +101,19 @@ router.get("/movie-types", (req, resp) => {
 });
 
 /**
- * 通过类别ID查询所有电影
+ * 通过类别ID查询所有图书
  * @param:
  *   详见接口文档
  * @return:
  *   {code:200, msg:'ok', data:[]}
  */
- router.get("/movie-infos/category", async (req, resp) => {
+ router.get("/book_details/type", async (req, resp) => {
   // 获取请求参数   get请求的参数封装在req.query中
-  let { page, pagesize, cid } = req.query;
+  let { page, pagesize, id } = req.query;
 
   //TODO 服务端表单验证  如果验证通过那么继续后续业务  如果验证不通过，则直接返回参数异常
   let schema = Joi.object({
-    cid: Joi.number().required(), // cid必须是数字，必填
+    id: Joi.number().required(), // id必须是数字，必填
     page: Joi.number().required(), // page必须是数字，必填
     pagesize: Joi.number().integer().max(100).required(), // pagesize必须是不大于100的数字，必填
   });
@@ -125,15 +125,15 @@ router.get("/movie-types", (req, resp) => {
 
   // 执行查询数组业务
   try {
-    cid = parseInt(cid);
+    id = parseInt(id);
     let startIndex = (page - 1) * pagesize;
     let size = parseInt(pagesize);
-    let sql = "select * from movie_info where category_id=? limit ?,?";
-    console.log(`------------------------select * from movie_info where category_id=${cid} limit ${startIndex},${size}---------------------------`)
-    let result = await pool.querySync(sql, [cid, startIndex, size]);
+    let sql = "select * from book_details where type_id=? limit ?,?";
+    console.log(`------------------------select * from movie_info where type_id=${id} limit ${startIndex},${size}---------------------------`)
+    let result = await pool.querySync(sql, [id, startIndex, size]);
     // 执行查询总条目数
-    let sql2 = "select count(*) as count from movie_info where category_id=?";
-    let result2 = await pool.querySync(sql2, [cid]);
+    let sql2 = "select count(*) as count from book_details where type_id=?";
+    let result2 = await pool.querySync(sql2, [id]);
     let total = result2[0].count;
     resp.send(
       Response.ok({ page: parseInt(page), pagesize: size, total, result })
