@@ -1,4 +1,5 @@
-/**  定义电影院相关的接口 */
+/**  定义书房相关的接口 */
+//删除书房,通过id查询书房,查询所有书房,查询所有书房类型,添加书房,修改书房
 const express = require("express");
 const router = express.Router();
 const Joi = require("joi");
@@ -8,13 +9,13 @@ const Response = require("../utils/Response.js");
 const pool = require("../utils/db.js");
 
 /**
- * 删除电影院接口
+ * 删除书房接口
  * @param:
- *   id:   影院id
+ *   id:   书房id
  * @return:
  *   {code:200, msg:'ok'}
  */
- router.post("/cinema/del", (req, resp) => {
+ router.post("/book_store/del", (req, resp) => {
   let { id } = req.body;
 
   // 表单验证
@@ -28,7 +29,7 @@ const pool = require("../utils/db.js");
   }
 
   // 执行删除业务
-  let sql = "delete from movie_cinema where id = ?";
+  let sql = "delete from book_store where id = ?";
   pool.query(sql, [id], (error, result) => {
     if (error) {
       resp.send(Response.error(500, error));
@@ -39,13 +40,13 @@ const pool = require("../utils/db.js");
 });
 
 /**
- * 通过ID查询电影院接口
+ * 通过ID查询书房接口
  * @param:
- *   id:   电影院id
+ *   id:   书房id
  * @return:
  *   {code:200, msg:'ok', data:{}}
  */
- router.get("/cinema/query", (req, resp) => {
+ router.get("/book_store/query", (req, resp) => {
   let { id } = req.query;
   // 表单验证
   let schema = Joi.object({
@@ -58,7 +59,7 @@ const pool = require("../utils/db.js");
   }
 
   // 执行查询业务
-  let sql = "select * from movie_cinema where id=?";
+  let sql = "select * from book_store where id=?";
   pool.query(sql, [id], (error, result) => {
     if (error) {
       resp.send(Response.error(500, error));
@@ -74,14 +75,14 @@ const pool = require("../utils/db.js");
 });
 
 /**
- * 查询所有电影院
+ * 查询所有书房
  * @param:
  *   无
  * @return:
  *   {code:200, msg:'ok', data:[{}]}
  */
-router.get('/cinemas', (req, resp)=>{
-  let sql ="select * from movie_cinema"
+router.get('/book_stores', (req, resp)=>{
+  let sql ="select * from book_store"
   pool.query(sql, (error, result)=>{
     if(error){
       resp.send(Response.error(500, error))
@@ -91,59 +92,16 @@ router.get('/cinemas', (req, resp)=>{
   })
 })
 
-/**
- * 通过日期与电影ID查询有该电影排期的电影院列表
- * 
- */
-router.get('/cinemas/date', (req, resp)=>{
-  let {showingon_date, movie_id} = req.query
-  // 表单验证
-  let schema = Joi.object({
-    showingon_date: Joi.string().required(),
-    movie_id: Joi.string().required()
-  });
-  let { error, value } = schema.validate(req.query);
-  if (error) {
-    resp.send(Response.error(400, error));
-    return; // 结束
-  }
-
-  // 执行查询
-  let sql = `SELECT
-    mc.id id,
-    mc.cinema_name cinema_name,
-    mc.address address,
-    mc.province province,
-    mc.city city,
-    mc.district district,
-    mc.longitude longitude,
-    mc.latitude latitude,
-    mc.tags tags
-  FROM
-    movie_cinema mc join showingon_plan sp on mc.id=sp.cinema_id
-  WHERE
-    sp.movie_id=? and sp.showingon_date=? and status=1
-  GROUP BY
-    mc.id`
-
-  pool.query(sql, [movie_id, showingon_date], (error, result)=>{
-    if(error){
-      resp.send(Response.error(500, error))
-      throw error;
-    }
-    resp.send(Response.ok(result))
-  })
-})
 
 /**
- * 查询所有电影院的标签
+ * 查询所有书房的类型
  * @param:
  *   无
  * @return:
  *   {code:200, msg:'ok', data:[{}]}
  */
-router.get('/cinema/tags', (req,resp)=>{
-  let sql = "select * from movie_cinema_tag"
+router.get('/book_store/types', (req,resp)=>{
+  let sql = "select * from book_store_type"
   pool.query(sql, (error, result)=>{
     if (error) {
       resp.send(Response.error(500, error));
@@ -154,34 +112,34 @@ router.get('/cinema/tags', (req,resp)=>{
 })
 
 /**
- * 添加电影院接口
+ * 添加书房接口
  * @param:
  *   详见接口文档
  * @return:
  *   {code:200, msg:'ok'}
  */
-router.post("/cinema/add", (req, resp) => {
+router.post("/book_store/add", (req, resp) => {
   let {
-    cinema_name,
+    bookstore_name,
     address,
     province,
     city,
     district,
     longitude,
     latitude,
-    tags,
+    types,
   } = req.body; // post请求参数在req.body中
 
   // 表单验证
   let schema = Joi.object({
-    cinema_name: Joi.string().required(),
+    bookstore_name: Joi.string().required(),
     address: Joi.string().required(),
     province: Joi.string().required(),
     city: Joi.string().required(),
     district: Joi.string().required(),
     longitude: Joi.number().required(),
     latitude: Joi.number().required(),
-    tags: Joi.string().required(),
+    types: Joi.string().required(),
   });
   let { error, value } = schema.validate(req.body);
   if (error) {
@@ -190,18 +148,18 @@ router.post("/cinema/add", (req, resp) => {
   }
 
   // 表单验证通过，执行添加操作
-  let sql = `insert into movie_cinema (
-      cinema_name,
+  let sql = `insert into book_store (
+      bookstore_name,
       address,
       province,
       city,
       district,
       longitude,
       latitude,
-      tags) values (?,?,?,?,?,?,?,?)`;
+      types) values (?,?,?,?,?,?,?,?)`;
   pool.query(
     sql,
-    [cinema_name, address, province, city, district, longitude, latitude, tags],
+    [bookstore_name, address, province, city, district, longitude, latitude, types],
     (error, result) => {
       if (error) {
         resp.send(Response.error(500, error));
@@ -213,36 +171,36 @@ router.post("/cinema/add", (req, resp) => {
 });
 
 /**
- * 修改电影院接口
+ * 修改书房接口
  * @param:
  *   详见接口文档
  * @return:
  *   {code:200, msg:'ok'}
  */
- router.post("/cinema/update", (req, resp) => {
+ router.post("/book_store/update", (req, resp) => {
   let {
     id,
-    cinema_name,
+    bookstore_name,
     address,
     province,
     city,
     district,
     longitude,
     latitude,
-    tags,
+    types,
   } = req.body; // post请求参数在req.body中
 
   // 表单验证
   let schema = Joi.object({
     id: Joi.string().required(),
-    cinema_name: Joi.string().required(),
+    bookstore_name: Joi.string().required(),
     address: Joi.string().required(),
     province: Joi.string().required(),
     city: Joi.string().required(),
     district: Joi.string().required(),
     longitude: Joi.number().required(),
     latitude: Joi.number().required(),
-    tags: Joi.string().required(),
+    types: Joi.string().required(),
   });
   let { error, value } = schema.validate(req.body);
   if (error) {
@@ -251,19 +209,19 @@ router.post("/cinema/add", (req, resp) => {
   }
 
   // 表单验证通过，执行添加操作
-  let sql = `update movie_cinema set 
-      cinema_name=?, 
+  let sql = `update book_store set 
+      bookstore_name=?, 
       address=?, 
       province=?, 
       city=?, 
       district=?, 
       longitude=?, 
       latitude=?, 
-      tags=?
+      types=?
     where id=?`;
   pool.query(
     sql,
-    [cinema_name, address, province, city, district, longitude, latitude, tags, id],
+    [bookstore_name, address, province, city, district, longitude, latitude, types, id],
     (error, result) => {
       if (error) {
         resp.send(Response.error(500, error));

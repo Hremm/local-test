@@ -52,6 +52,7 @@ app.use(tokenTools);
 app.use(require("./router/Admin.js"));
 app.use(require("./router/BookAuthor.js"))
 app.use(require('./router/BookDetails.js'))
+app.use(require('./router/BookStore.js'))
 
 /**
  * 接口， 处理/请求
