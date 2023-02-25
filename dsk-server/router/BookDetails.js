@@ -297,9 +297,9 @@ router.get("/book_details/query", (req, resp) => {
               mi.author_name author_name,
               mi.publish_date publish_date,
               mi.score score,
-              mi.description description,
+              mi.description description
             from book_details mi where mi.bid=? LIMIT 0,1;`;
-  pool.query(sql, [id], (error, result) => {
+  pool.query(sql, [bid], (error, result) => {
     if (error) {
       resp.send(Response.error(500, error));
       throw error;

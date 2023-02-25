@@ -1,4 +1,5 @@
 /**  定义图书作者相关的接口 */
+//删除作者,新增作者,查询作者列表,通过姓名关键字查询作者
 const express = require("express");
 const router = express.Router();
 const Joi = require("joi");
