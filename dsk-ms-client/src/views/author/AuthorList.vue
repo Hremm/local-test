@@ -17,11 +17,11 @@
 
     <!-- 呈现演员列表 -->
     <person
-      v-for="item in actors"
+      v-for="item in authors"
       :key="item.id"
-      :name="item.actor_name"
-      :avatar="item.actor_avatar"
-      @del="deleteActor(item.id)"
+      :name="item.author_name"
+      :avatar="item.author_avatar"
+      @del="deleteAuthor(item.id)"
     >
     </person>
   </div>
@@ -29,7 +29,6 @@
 
 <script>
 import Person from "@/components/Person.vue";
-import myaxios from "@/http/MyAxios.js";
 import httpApi from "@/http/index.js";
 export default {
   components: {
@@ -38,7 +37,7 @@ export default {
 
   data() {
     return {
-      actors: [], // 存储演员列表
+      authors: [], // 存储演员列表
       name: "", // 绑定姓名输入框value
     };
   },
@@ -50,7 +49,7 @@ export default {
 
   methods: {
     /** 捕获到用户点了叉子 */
-    deleteActor(id) {
+    deleteAuthor(id) {
       console.log("在父组件中 捕获到了用户点了叉子:id=" + id);
       // 发送请求，删除该演员
 
@@ -60,7 +59,7 @@ export default {
         type: "warning",
       })
         .then(() => {
-          httpApi.actorAPI.del({ id }).then((res) => {
+          httpApi.authorAPI.del({ id }).then((res) => {
             console.log("删除演员结果", res);
             if (res.data.code == 200) {
               this.search();
@@ -78,7 +77,7 @@ export default {
           });
         });
 
-      // let url = "http://localhost:3010/movie-actor/del";
+      // let url = "http://localhost:3060/book-author/del";
       // myaxios.post(url, { id }).then((res) => {
       //   console.log("删除演员结果", res);
       //   if (res.data.code == 200) {
@@ -91,17 +90,17 @@ export default {
     search() {
       if (this.name.trim()) {
         // 如果name有关键字数据
-        // let url = "http://localhost:3010/movie-actors/name";
+        // let url = "http://localhost:3060/book-authors/name";
         // let params = { name: this.name };
         // myaxios.post(url, params).then((res) => {
         //   console.log("查询到的演员列表如下", res);
         //   // 更新列表
-        //   this.actors = res.data.data;
+        //   this.authors = res.data.data;
         // });
         let params = { name: this.name };
-        httpApi.actorAPI.queryByNameLike(params).then((res) => {
+        httpApi.authorAPI.queryByNameLike(params).then((res) => {
           console.log("查询到的演员列表如下", res);
-          this.actors = res.data.data;
+          this.authors = res.data.data;
         });
       } else {
         // 如果没有关键字数据
@@ -111,17 +110,17 @@ export default {
 
     /** 初始化数据 */
     init() {
-      // let url = "http://localhost:3010/movie-actors";
-      // //  url = "https://web.codeboy.com/bmdapi/movie-actors"
+      // let url = "http://localhost:3060/book-authors";
+      // //  url = "https://web.codeboy.com/bmdapi/book-authors"
       // let params = { page: 1, pagesize: 100 };
       // myaxios.get(url, params).then((res) => {
       //   console.log("加载演员列表结果", res);
-      //   // 将res.data.data中存储的演员列表存入this.actors
-      //   this.actors = res.data.data;
+      //   // 将res.data.data中存储的演员列表存入this.authors
+      //   this.authors = res.data.data;
       // });
-      httpApi.actorAPI.queryAllActor().then((res) => {
+      httpApi.authorAPI.queryAllAuthor().then((res) => {
         console.log("加载演员列表结果", res);
-        this.actors = res.data.data;
+        this.authors = res.data.data;
       });
     },
   },

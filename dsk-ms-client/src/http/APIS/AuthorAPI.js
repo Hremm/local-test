@@ -1,12 +1,12 @@
 //封装演员模块相关接口
 import myaxios from "../MyAxios.js";
 import baseURL from "../baseURL.js";
-const bmdURL = baseURL.bmdURL;
-const actorAPI = {
+const dskURL = baseURL.dskURL;
+const authorAPI = {
   //查询所有演员，返回Promise对象
-  queryAllActor() {
-    let url = bmdURL + "/movie-actors";
-    return myaxios.get(url, { page: 1, pagesize: 100 });
+  queryAllAuthor() {
+    let url = dskURL + "/book_authors";
+    return myaxios.get(url, { page: 1, pagesize: 100});
   },
   /**
    *通过姓名模糊查询演员
@@ -14,16 +14,16 @@ const actorAPI = {
    * @return Promise
    */
   queryByNameLike(params) {
-    let url = bmdURL + "/movie-actors/name";
+    let url = dskURL + "/book_authors/name";
     return myaxios.post(url, params);
   },
   /**
    *添加演员
-   * @param {Obj} params 参数对象 例如 {actorName:演员名称, actorAvatar:演员头像}
+   * @param {Obj} params 参数对象 例如 {authorName:演员名称, authorAvatar:演员头像}
    * @return Promise
    */
   add(params) {
-    let url = bmdURL + "/movie-actor/add";
+    let url = dskURL + "/book_author/add";
     return myaxios.post(url, params);
   },
   /**
@@ -32,8 +32,8 @@ const actorAPI = {
    * @return Promise
    */
   del(params) {
-    let url = bmdURL + "/movie-actor/del";
+    let url = dskURL + "/book_author/del";
     return myaxios.post(url, params);
   },
 };
-export default actorAPI;
+export default authorAPI;

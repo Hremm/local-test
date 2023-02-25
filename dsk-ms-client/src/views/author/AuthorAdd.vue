@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- 添加演员表单 -->
+    <!-- 添加作者表单 -->
     <el-form
       ref="form"
       :model="form"
@@ -8,10 +8,10 @@
       label-width="100px"
       style="width: 600px"
     >
-      <el-form-item label="演员姓名" prop="actorName">
-        <el-input v-model="form.actorName"></el-input>
+      <el-form-item label="作者姓名" prop="authorName">
+        <el-input v-model="form.authorName"></el-input>
       </el-form-item>
-      <el-form-item label="选择头像" prop="actorAvatar">
+      <el-form-item label="选择头像" prop="authorAvatar">
         <el-upload
           class="avatar-uploader"
           :action="`${uploadURL}/upload`"
@@ -19,7 +19,7 @@
           :on-success="handleAvatarSuccess"
           :before-upload="beforeAvatarUpload"
         >
-          <img v-if="form.actorAvatar" :src="form.actorAvatar" class="avatar" />
+          <img v-if="form.authorAvatar" :src="form.authorAvatar" class="avatar" />
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
       </el-form-item>
@@ -33,20 +33,20 @@
 
 <script>
 import myaxios from "@/http/MyAxios.js";
-import add from "@/http/APIS/actorAPI";
+import add from "@/http/APIS/AuthorAPI";
 import httpApi from "@/http";
 export default {
   data() {
     return {
       form: {
-        actorName: "", // 封装演员名字
-        actorAvatar: "", // 封装演员头像路径
+        authorName: "", // 封装作者名字
+        authorAvatar: "", // 封装作者头像路径
       },
       rules: {
-        actorName: [
-          { required: true, message: "演员姓名不能为空", trigger: "blur" },
+        authorName: [
+          { required: true, message: "作者姓名不能为空", trigger: "blur" },
         ],
-        actorAvatar: [
+        authorAvatar: [
           { required: true, message: "请选择一张头像", trigger: "blur" },
         ],
       },
@@ -59,10 +59,10 @@ export default {
       // 验证表单，只有验证通过才发请求
       this.$refs["form"].validate((valid) => {
         if (valid) {
-          // let url = "http://localhost:3010/movie-actor/add";
+          // let url = "http://localhost:3060/movie-author/add";
 
-          httpApi.actorAPI.add(this.form).then((res) => {
-            console.log("添加演员结果", res);
+          httpApi.authorAPI.add(this.form).then((res) => {
+            console.log("添加作者结果", res);
             if (res.data.code == 200) {
               // 成功
               this.$message.success("恭喜，添加成功");
@@ -80,8 +80,8 @@ export default {
     /** 上传成功后执行 */
     handleAvatarSuccess(res, file) {
       console.log(res);
-      // 将res.data中保存的图片访问链接，存入this.form.actorAvatar
-      this.form.actorAvatar = res.data;
+      // 将res.data中保存的图片访问链接，存入this.form.authorAvatar
+      this.form.authorAvatar = res.data;
     },
 
     /** 上传之前完成图片格式的验证 */

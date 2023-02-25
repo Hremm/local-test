@@ -1,5 +1,5 @@
 //提供访问具体某接口模块对象
-import actorAPI from "./APIS/actorAPI";
+import authorAPI from "./APIS/AuthorAPI";
 import directorAPI from "./APIS/directorAPI";
 import movieAPI from "./APIS/movieAPI";
 import adminApi from "./APIS/AdminApi";
@@ -8,7 +8,7 @@ import cinemaRoomApi from "./APIS/CinemaRoomApi";
 import movieThumbApi from "./APIS/MovieThumbApi";
 import showingonPlanApi from "./APIS/ShowingonPlanApi";
 const httpApi = {
-  actorAPI,
+  authorAPI,
   movieAPI,
   directorAPI,
   adminApi,

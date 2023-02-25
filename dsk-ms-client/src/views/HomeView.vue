@@ -217,7 +217,7 @@ export default {
             type: "memu-item",
             link: "/home/book-list",
             title: "图书列表",
-            icon: "el-icon-notebook-2",
+            icon: "el-icon-tickets",
           },
           {
             type: "memu-item",
