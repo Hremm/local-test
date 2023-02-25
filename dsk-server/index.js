@@ -27,10 +27,10 @@ const tokenTools = function (req, resp, next) {
   }
 
   // 测试环境中，不做token拦截，直接执行后续业务
-  if (1 == 1) {
-    next();
-    return;
-  }
+  //if (1 == 1) {
+   // next();
+  //  return;
+ // }
 
 
   // 执行token验证
