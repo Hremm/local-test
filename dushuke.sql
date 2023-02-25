@@ -11,7 +11,7 @@
  Target Server Version : 100119
  File Encoding         : 65001
 
- Date: 25/02/2023 11:42:11
+ Date: 25/02/2023 18:10:52
 */
 DROP DATABASE IF EXISTS `dushuke`;
 CREATE DATABASE `dushuke` DEFAULT CHARSET UTF8;
@@ -45,7 +45,7 @@ CREATE TABLE `book_author`  (
   `author_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '作家名称\r\n',
   `author_avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '作家头像路径',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of book_author
@@ -56,7 +56,7 @@ INSERT INTO `book_author` VALUES (3, '测试员', 'https://s1.ax1x.com/2023/02/2
 INSERT INTO `book_author` VALUES (4, '测试员', 'https://s1.ax1x.com/2023/02/22/pSvdxpT.png');
 INSERT INTO `book_author` VALUES (5, '测试员', 'https://s1.ax1x.com/2023/02/22/pSvdxpT.png');
 INSERT INTO `book_author` VALUES (6, '测试员', 'https://s1.ax1x.com/2023/02/22/pSvdxpT.png');
-INSERT INTO `book_author` VALUES (7, '测试员', 'https://s1.ax1x.com/2023/02/22/pSvdxpT.png');
+INSERT INTO `book_author` VALUES (8, '测试员', 'https://s1.ax1x.com/2023/02/18/pSLutMQ.jpg');
 
 -- ----------------------------
 -- Table structure for book_details
