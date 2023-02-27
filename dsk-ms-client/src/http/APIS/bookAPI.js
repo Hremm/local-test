@@ -1,23 +1,23 @@
 //
 import myaxios from "../MyAxios.js";
 import baseURL from "../baseURL.js";
-const bmdURL = baseURL.bmdURL;
+const dskURL = baseURL.dskURL;
 
-const movieAPI = {
+const bookAPI = {
   /**
    *页码改变时,查询电影列表
    * @param {obj} params :{page:1,pagesize:10}
    *
    */
   queryAll(params) {
-    let url = bmdURL + "/movie-infos";
+    let url = dskURL + "/book_details";
     return myaxios.get(url, params);
   },
   /**
    * 模糊查询 参数:{name:关键字,page:1,pagesize:2}
    */
   queryByNameLike(params) {
-    let url = bmdURL + "/movie-infos/name";
+    let url = dskURL + "/book_details/name";
     return myaxios.post(url, params);
   },
   /**
@@ -25,19 +25,19 @@ const movieAPI = {
    * @param {obj} params {id:1}
    */
   del(params) {
-    let url = bmdURL + "/movie-info/del";
+    let url = dskURL + "/book_details/del";
     return myaxios.post(url, params);
   },
   /**
    * 查询电影类型
    */
   queryTypes() {
-    let url = bmdURL + "/movie-types";
+    let url = dskURL + "/book_type";
     return myaxios.get(url);
   },
   // 新增电影
   add(params) {
-    let url = bmdURL + "/movie-info/add";
+    let url = dskURL + "/book_details/add";
     return myaxios.post(url, params);
   },
   /**
@@ -45,14 +45,14 @@ const movieAPI = {
    * @param {obj} params
    */
   queryById(params) {
-    let url = bmdURL + "/movie-info/query";
+    let url = dskURL + "/book_details/query";
     return myaxios.get(url, params);
   },
   //更新电影信息
   update(params) {
-    let url = bmdURL + "/movie-info/update";
+    let url = dskURL + "/book_details/update";
     return myaxios.post(url, params);
   },
 };
 
-export default movieAPI;
+export default bookAPI;

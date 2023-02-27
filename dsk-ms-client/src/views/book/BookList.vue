@@ -1,50 +1,49 @@
 <template>
   <div>
- 
 
     <!-- 搜索表单 -->
     <el-form @submit.native.prevent :inline="true" class="demo-form-inline">
-      <el-form-item label="电影名称">
+      <el-form-item label="图书名称">
         <el-input
           @keyup.native.enter="submit"
           v-model="name"
-          placeholder="请输入电影关键字"
+          placeholder="请输入书名关键字"
         ></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submit">查询</el-button>
       </el-form-item>
     </el-form>
-    <el-divider content-position="left">电影列表</el-divider>
+    <el-divider content-position="left">图书列表</el-divider>
 
-    <!-- 电影列表 -->
+    <!-- 图书列表 -->
 
-    <el-table :data="movieData.result">
-      <el-table-column label="电影封面">
+    <el-table :data="bookData.result">
+      <el-table-column label="图书封面">
         <template slot-scope="scope">
           <img :src="scope.row.cover" width="55px" />
         </template>
       </el-table-column>
-      <!-- <el-table-column label="电影名称" align="left"
+      <!-- <el-table-column label="图书名称" align="left"
         ><template slot-scope="scope">
           <span>{{ scope.row.title }}</span>
         </template></el-table-column
       >
-      <el-table-column label="主演" align="center"></el-table-column>
-      <el-table-column label="上映时间"></el-table-column>
-      <el-table-column label="时长"></el-table-column>
+      <el-table-column label="作者" align="center"></el-table-column>
+      <el-table-column label="发布日期"></el-table-column>
+      <el-table-column label="评分"></el-table-column>
       <el-table-column label="所属类别"></el-table-column>
       <el-table-column label="操作"></el-table-column> -->
-      <el-table-column label="电影名称" prop="title"></el-table-column>
-      <el-table-column label="主演" prop="star_actor"></el-table-column>
+      <el-table-column label="图书名称" prop="title"></el-table-column>
+      <el-table-column label="作者" prop="author_name"></el-table-column>
       <el-table-column
-        label="上映时间"
+        label="发布日期"
         align="center"
         width="120px"
         prop="showingon"
       ></el-table-column>
-      <el-table-column label="时长" align="center" width="80px" prop="duration">
-        <template slot-scope="scope">{{ scope.row.duration }} 分钟</template>
+      <el-table-column label="评分" align="center" width="80px" prop="score">
+        <template slot-scope="scope">{{ scope.row.score }} 分</template>
       </el-table-column>
       <el-table-column label="所属类别" prop="type"></el-table-column>
       <el-table-column label="操作" width="180px">
@@ -62,7 +61,7 @@
             circle
           ></el-button>
           <el-button
-            @click="$router.push('/home/movie-update/' + scope.row.id)"
+            @click="$router.push('/home/book-update/' + scope.row.id)"
             size="small"
             type="warning"
             icon="el-icon-edit"
@@ -81,10 +80,10 @@
     <!-- 分页器 -->
     <el-pagination
       background
-      :page-size="movieData.pagesize"
-      :current-page="movieData.page"
+      :page-size="bookData.pagesize"
+      :current-page="bookData.page"
       layout="->,total,prev, pager, next,jumper"
-      :total="movieData.total"
+      :total="bookData.total"
       @current-change="changeCurrentPage"
     >
     </el-pagination>
@@ -97,68 +96,68 @@ export default {
   data() {
     return {
       name: "", //查询的关键词
-      movieData: {
-        //保存电影数据
+      bookData: {
+        //保存图书数据
         page: 1, //页码
-        pagesize: 5, //每页多少条
+        pagesize: 10, //每页多少条
         total: 0, //总条目
-        result: [], //电影列表
+        result: [], //图书列表
       },
     };
   },
   methods: {
     //提交表单时把页面重新定位到第一页
     submit() {
-      this.movieData.page = 1;
+      this.bookData.page = 1;
       this.search();
     },
     //模糊查询
     search() {
       if (this.name.trim()) {
         //有关键字
-        this.queryMovieByName();
+        this.queryBookByName();
       } else {
         //没有关键字
-        this.queryMovie();
+        this.queryBook();
       }
     },
     //改变页码时触发
     changeCurrentPage(page) {
-      this.movieData.page = page; // 修改当前页
-      this.search(); // 重新加载当前页的电影列表
+      this.bookData.page = page; // 修改当前页
+      this.search(); // 重新加载当前页的图书列表
     },
 
-    queryMovie() {
+    queryBook() {
       let params = {
-        page: this.movieData.page,
-        pagesize: this.movieData.pagesize,
+        page: this.bookData.page,
+        pagesize: this.bookData.pagesize,
       };
-      httpApi.movieAPI.queryAll(params).then((res) => {
-        console.log("首页电影数据列表", res);
-        this.movieData = res.data.data;
+      httpApi.bookAPI.queryAll(params).then((res) => {
+        console.log("首页图书数据列表", res);
+        this.bookData = res.data.data;
       });
     },
-    // 模糊查询电影列表
-    queryMovieByName() {
+    // 模糊查询图书列表
+    queryBookByName() {
       let params = {
         name: this.name,
-        page: this.movieData.page,
-        pagesize: this.movieData.pagesize,
+        page: this.bookData.page,
+        pagesize: this.bookData.pagesize,
       };
-      httpApi.movieAPI.queryByNameLike(params).then((res) => {
-        console.log("模糊查询电影数据列表", res);
-        this.movieData = res.data.data;
+      httpApi.bookAPI.queryByNameLike(params).then((res) => {
+        console.log("模糊查询图书数据列表", res);
+        this.bookData = res.data.data;
       });
     },
-    del(movie) {
-      console.log("点击了删除", movie);
-      this.$confirm("此操作将永久删除该电影, 是否继续?", "提示", {
+    del(book) {
+      console.log("点击了删除", book);
+      this.$confirm("此操作将永久删除该图书, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
       })
         .then(() => {
-          httpApi.movieAPI.del({ id: movie }).then((res) => {
+          httpApi.bookAPI.del({ id: book }).then((res) => {
             console.log("删除成功了,删除的结果如下", res);
             if (res.data.code == 200) {
               this.search();
@@ -177,12 +176,12 @@ export default {
         });
     },
 
-    //初始显示电影
+    //初始显示图书
     init() {
-      let params = { page: 1, pagesize: 5 };
-      httpApi.movieAPI.queryAll(params).then((res) => {
-        console.log("显示部分电影", res);
-        this.movieData = res.data.data;
+      let params = { page: 1, pagesize: 10 };
+      httpApi.bookAPI.queryAll(params).then((res) => {
+        console.log("显示部分图书", res);
+        this.bookData = res.data.data;
       });
     },
   },

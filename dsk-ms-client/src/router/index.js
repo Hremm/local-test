@@ -55,7 +55,7 @@ const routes = [
         path: "book-list",
         component: () => import("../views/book/BookList.vue"),
         meta: {
-          thumb: ["电影管理", "电影列表"],
+          thumb: ["图书管理", "图书列表"],
         },
       },
 
