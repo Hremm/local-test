@@ -11,7 +11,7 @@
  Target Server Version : 100119
  File Encoding         : 65001
 
- Date: 25/02/2023 18:10:52
+ Date: 27/02/2023 21:02:21
 */
 DROP DATABASE IF EXISTS `dushuke`;
 CREATE DATABASE `dushuke` DEFAULT CHARSET UTF8;
@@ -45,7 +45,7 @@ CREATE TABLE `book_author`  (
   `author_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '作家名称\r\n',
   `author_avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '作家头像路径',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of book_author
@@ -57,6 +57,10 @@ INSERT INTO `book_author` VALUES (4, '测试员', 'https://s1.ax1x.com/2023/02/2
 INSERT INTO `book_author` VALUES (5, '测试员', 'https://s1.ax1x.com/2023/02/22/pSvdxpT.png');
 INSERT INTO `book_author` VALUES (6, '测试员', 'https://s1.ax1x.com/2023/02/22/pSvdxpT.png');
 INSERT INTO `book_author` VALUES (8, '测试员', 'https://s1.ax1x.com/2023/02/18/pSLutMQ.jpg');
+INSERT INTO `book_author` VALUES (9, '测试员2.27', 'https://s1.ax1x.com/2023/02/18/pSLutMQ.jpg');
+INSERT INTO `book_author` VALUES (10, '测试员2.2720', 'https://s1.ax1x.com/2023/02/18/pSLutMQ.jpg');
+INSERT INTO `book_author` VALUES (12, '莫言222', 'http://localhost:9000/26bed262-d0e3-4617-afbc-6479f676100a.jpg');
+INSERT INTO `book_author` VALUES (13, '测试', 'http://localhost:9000/9e7fc74d-d739-4460-92a9-eeef666c30f3.jpg');
 
 -- ----------------------------
 -- Table structure for book_details
@@ -75,8 +79,8 @@ CREATE TABLE `book_details`  (
   PRIMARY KEY (`bid`) USING BTREE,
   INDEX `typeId`(`type_id`) USING BTREE,
   INDEX `type`(`type`) USING BTREE,
-  CONSTRAINT `typeId` FOREIGN KEY (`type_id`) REFERENCES `book_type` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  CONSTRAINT `type` FOREIGN KEY (`type`) REFERENCES `book_type` (`typename`) ON DELETE NO ACTION ON UPDATE CASCADE
+  CONSTRAINT `type` FOREIGN KEY (`type`) REFERENCES `book_type` (`typename`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  CONSTRAINT `typeId` FOREIGN KEY (`type_id`) REFERENCES `book_type` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
 ) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
