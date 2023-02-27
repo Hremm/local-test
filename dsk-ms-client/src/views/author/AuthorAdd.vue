@@ -8,10 +8,10 @@
       label-width="100px"
       style="width: 600px"
     >
-      <el-form-item label="作者姓名" prop="authorName">
-        <el-input v-model="form.authorName"></el-input>
+      <el-form-item label="作者姓名" prop="author_name">
+        <el-input v-model="form.author_name"></el-input>
       </el-form-item>
-      <el-form-item label="选择头像" prop="authorAvatar">
+      <el-form-item label="选择头像" prop="author_avatar">
         <el-upload
           class="avatar-uploader"
           :action="`${uploadURL}/upload`"
@@ -19,12 +19,12 @@
           :on-success="handleAvatarSuccess"
           :before-upload="beforeAvatarUpload"
         >
-          <img v-if="form.authorAvatar" :src="form.authorAvatar" class="avatar" />
+          <img v-if="form.author_avatar" :src="form.author_avatar" class="avatar" />
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submit">立即新增</el-button>
+        <el-button type="primary" @click="submit()">立即新增</el-button>
         <el-button>取消</el-button>
       </el-form-item>
     </el-form>
@@ -32,21 +32,19 @@
 </template>
 
 <script>
-import myaxios from "@/http/MyAxios.js";
-import add from "@/http/APIS/AuthorAPI";
-import httpApi from "@/http";
+import httpApi from "@/http/index.js";
 export default {
   data() {
     return {
       form: {
-        authorName: "", // 封装作者名字
-        authorAvatar: "", // 封装作者头像路径
+        author_name: "", // 封装作者名字
+        author_avatar: "", // 封装作者头像路径
       },
       rules: {
-        authorName: [
+        author_name: [
           { required: true, message: "作者姓名不能为空", trigger: "blur" },
         ],
-        authorAvatar: [
+        author_avatar: [
           { required: true, message: "请选择一张头像", trigger: "blur" },
         ],
       },
@@ -59,7 +57,7 @@ export default {
       // 验证表单，只有验证通过才发请求
       this.$refs["form"].validate((valid) => {
         if (valid) {
-          // let url = "http://localhost:3060/movie-author/add";
+          // let url = "http://localhost:3060/book-author/add";
 
           httpApi.authorAPI.add(this.form).then((res) => {
             console.log("添加作者结果", res);
@@ -80,8 +78,8 @@ export default {
     /** 上传成功后执行 */
     handleAvatarSuccess(res, file) {
       console.log(res);
-      // 将res.data中保存的图片访问链接，存入this.form.authorAvatar
-      this.form.authorAvatar = res.data;
+      // 将res.data中保存的图片访问链接，存入this.form.author_avatar
+      this.form.author_avatar = res.data;
     },
 
     /** 上传之前完成图片格式的验证 */
