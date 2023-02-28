@@ -34,21 +34,20 @@
       <el-table-column label="评分"></el-table-column>
       <el-table-column label="所属类别"></el-table-column>
       <el-table-column label="操作"></el-table-column> -->
-      <el-table-column label="图书名称" prop="title"></el-table-column>
+      <el-table-column label="图书名称" prop="title" ></el-table-column>
       <el-table-column label="作者" prop="author_name"></el-table-column>
       <el-table-column
         label="发布日期"
-        align="center"
         width="120px"
         prop="publish_date"
       ></el-table-column>
       <el-table-column label="评分" align="center" width="80px" prop="score">
         <template slot-scope="scope">{{ scope.row.score }} 分</template>
       </el-table-column>
-      <el-table-column label="所属类别" prop="type"></el-table-column>
-      <el-table-column label="操作" width="180px">
+      <el-table-column label="所属类别" prop="type" align="center"></el-table-column>
+      <el-table-column label="操作" width="180px" align="center">
         <template slot-scope="scope">
-          <el-button
+        <!--   <el-button
             size="small"
             type="success"
             icon="el-icon-check"
@@ -59,7 +58,7 @@
             type="info"
             icon="el-icon-message"
             circle
-          ></el-button>
+          ></el-button> -->
           <el-button
             @click="$router.push('/home/book-update/' + scope.row.bid)"
             size="small"

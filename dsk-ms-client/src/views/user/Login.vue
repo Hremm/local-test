@@ -99,24 +99,12 @@ export default {
 .form .title {
   text-align: center;
   font-size: 1.5em;
-  color: white;
+  color:white;
   margin-bottom: 20px;
 }
-.back {
+.back{
   height: 100vh;
-  background-image: linear-gradient(125deg, #e14040, #b050cd, #4842c9, #34828d);
-  background-size: 500%;
-  animation: animate 20s infinite;
-}
-@keyframes animate {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  background-image: url(@/assets/bg.jpg);
+  background-size: cover;
 }
 </style>

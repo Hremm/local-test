@@ -37,20 +37,6 @@ const routes = [
           thumb: ["作者管理", "新增作者"],
         },
       },
-      /* {
-        path: "director-list",
-        component: () => import("../views/director/DirectorList.vue"),
-        meta: {
-          thumb: ["导演管理", "导演列表"],
-        },
-      }, */
-     /*  {
-        path: "director-add",
-        component: () => import("../views/director/DirectorAdd.vue"),
-        meta: {
-          thumb: ["导演管理", "新增导演"],
-        },
-      }, */
       {
         path: "book-list",
         component: () => import("../views/book/BookList.vue"),
