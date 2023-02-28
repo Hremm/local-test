@@ -11,8 +11,9 @@
  Target Server Version : 100119
  File Encoding         : 65001
 
- Date: 27/02/2023 21:02:21
+ Date: 28/02/2023 21:01:08
 */
+
 DROP DATABASE IF EXISTS `dushuke`;
 CREATE DATABASE `dushuke` DEFAULT CHARSET UTF8;
 USE `dushuke`;
@@ -45,22 +46,25 @@ CREATE TABLE `book_author`  (
   `author_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '作家名称\r\n',
   `author_avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '作家头像路径',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of book_author
 -- ----------------------------
 INSERT INTO `book_author` VALUES (1, '佐野洋子', 'https://s1.ax1x.com/2023/02/18/pSLutMQ.jpg');
-INSERT INTO `book_author` VALUES (2, '测试员', 'https://s1.ax1x.com/2023/02/22/pSvdxpT.png');
-INSERT INTO `book_author` VALUES (3, '测试员', 'https://s1.ax1x.com/2023/02/22/pSvdxpT.png');
-INSERT INTO `book_author` VALUES (4, '测试员', 'https://s1.ax1x.com/2023/02/22/pSvdxpT.png');
-INSERT INTO `book_author` VALUES (5, '测试员', 'https://s1.ax1x.com/2023/02/22/pSvdxpT.png');
-INSERT INTO `book_author` VALUES (6, '测试员', 'https://s1.ax1x.com/2023/02/22/pSvdxpT.png');
-INSERT INTO `book_author` VALUES (8, '测试员', 'https://s1.ax1x.com/2023/02/18/pSLutMQ.jpg');
-INSERT INTO `book_author` VALUES (9, '测试员2.27', 'https://s1.ax1x.com/2023/02/18/pSLutMQ.jpg');
+INSERT INTO `book_author` VALUES (2, '测试员', 'https://s1.ax1x.com/2023/02/28/ppP3g2T.jpg');
+INSERT INTO `book_author` VALUES (3, '测试员', 'https://s1.ax1x.com/2023/02/28/ppP3g2T.jpg');
+INSERT INTO `book_author` VALUES (4, '测试员', 'https://s1.ax1x.com/2023/02/28/ppP3g2T.jpg');
+INSERT INTO `book_author` VALUES (5, '测试员', 'https://s1.ax1x.com/2023/02/28/ppP3g2T.jpg');
+INSERT INTO `book_author` VALUES (6, '测试员', 'https://s1.ax1x.com/2023/02/28/ppP3g2T.jpg');
+INSERT INTO `book_author` VALUES (8, '测试员', 'https://s1.ax1x.com/2023/02/28/ppP3g2T.jpg');
+INSERT INTO `book_author` VALUES (9, '测试员2.27', 'https://s1.ax1x.com/2023/02/28/ppP3g2T.jpg');
 INSERT INTO `book_author` VALUES (10, '测试员2.2720', 'https://s1.ax1x.com/2023/02/18/pSLutMQ.jpg');
-INSERT INTO `book_author` VALUES (12, '莫言222', 'http://localhost:9000/26bed262-d0e3-4617-afbc-6479f676100a.jpg');
-INSERT INTO `book_author` VALUES (13, '测试', 'http://localhost:9000/9e7fc74d-d739-4460-92a9-eeef666c30f3.jpg');
+INSERT INTO `book_author` VALUES (14, '测试员2.28', 'https://s1.ax1x.com/2023/02/28/ppP3g2T.jpg');
+INSERT INTO `book_author` VALUES (15, '莫言', 'http://localhost:9000/a30f8685-5688-401c-b9e8-4887358d1d15.jpg');
+INSERT INTO `book_author` VALUES (16, '测试员2', 'https://s1.ax1x.com/2023/02/28/ppP8aJx.jpg');
+INSERT INTO `book_author` VALUES (17, '测试员3', 'https://s1.ax1x.com/2023/02/28/ppP8dW6.jpg');
+INSERT INTO `book_author` VALUES (18, '测试2', 'http://localhost:9000/693026d1-065b-4e80-ab58-047555942791.jpg');
 
 -- ----------------------------
 -- Table structure for book_details
@@ -91,8 +95,6 @@ INSERT INTO `book_details` VALUES (2, 2, 'https://s1.ax1x.com/2023/02/24/pSzLoJs
 INSERT INTO `book_details` VALUES (3, 3, 'https://s1.ax1x.com/2023/02/24/pSzLoJs.jpg', '测试修改', '漫画绘本', '测试修改员', '1977-1', '0.1', '测试修改图书描述内容');
 INSERT INTO `book_details` VALUES (4, 2, 'https://s1.ax1x.com/2023/02/24/pSzLoJs.jpg', '测试图书标题', '人物传记', '新增接口测试员', '1970-3', '9.9', '测试新增图书描述内容');
 INSERT INTO `book_details` VALUES (5, 2, 'https://s1.ax1x.com/2023/02/24/pSzLoJs.jpg', '测试图书标题', '人物传记', '新增接口测试员', '1970-4', '9.9', '测试新增图书描述内容');
-INSERT INTO `book_details` VALUES (6, 2, 'https://s1.ax1x.com/2023/02/24/pSzLoJs.jpg', '测试图书标题', '人物传记', '新增接口测试员', '1970-5', '9.9', '测试新增图书描述内容');
-INSERT INTO `book_details` VALUES (7, 2, 'https://s1.ax1x.com/2023/02/24/pSzLoJs.jpg', '测试图书标题', '人物传记', '新增接口测试员', '1970-5', '0.1', '测试新增图书描述内容');
 
 -- ----------------------------
 -- Table structure for book_store
