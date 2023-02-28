@@ -40,7 +40,7 @@
         label="发布日期"
         align="center"
         width="120px"
-        prop="showingon"
+        prop="publish_date"
       ></el-table-column>
       <el-table-column label="评分" align="center" width="80px" prop="score">
         <template slot-scope="scope">{{ scope.row.score }} 分</template>
@@ -61,14 +61,14 @@
             circle
           ></el-button>
           <el-button
-            @click="$router.push('/home/book-update/' + scope.row.id)"
+            @click="$router.push('/home/book-update/' + scope.row.bid)"
             size="small"
             type="warning"
             icon="el-icon-edit"
             circle
           ></el-button>
           <el-button
-            @click="del(scope.row.id)"
+            @click="del(scope.row.bid)"
             size="small"
             type="danger"
             icon="el-icon-delete"
@@ -157,7 +157,7 @@ export default {
         type: "warning",
       })
         .then(() => {
-          httpApi.bookAPI.del({ id: book }).then((res) => {
+          httpApi.bookAPI.del({ bid: book }).then((res) => {
             console.log("删除成功了,删除的结果如下", res);
             if (res.data.code == 200) {
               this.search();
@@ -178,7 +178,7 @@ export default {
 
     //初始显示图书
     init() {
-      let params = { page: 1, pagesize: 10 };
+      let params = { page: 1, pagesize: 5 };
       httpApi.bookAPI.queryAll(params).then((res) => {
         console.log("显示部分图书", res);
         this.bookData = res.data.data;

@@ -95,14 +95,14 @@ const routes = [
         },
       }, */
       /* {
-        path: "showingon-plan-add/:roomId",
+        path: "publish_date-plan-add/:roomId",
         component: () => import("../views/bookstore/ShowingonPlanAdd.vue"),
         meta: {
           thumb: ["电影院管理", "电影院列表", "放映厅列表", "新增排片计划"],
         },
       },
       {
-        path: "showingon-plan-list/:roomId",
+        path: "publish_date-plan-list/:roomId",
         component: () => import("../views/bookstore/ShowingonPlanList.vue"),
         meta: {
           thumb: ["电影院管理", "电影院列表", "放映厅列表", "排片计划列表"],

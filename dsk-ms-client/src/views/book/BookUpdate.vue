@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- 修改电影的表单 -->
+    <!-- 修改图书的表单 -->
     <el-form
       label-width="120px"
       style="width: 600px"
@@ -20,20 +20,20 @@
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
       </el-form-item>
-      <el-form-item label="电影类别" prop="category_id">
+      <!-- <el-form-item label="图书类别" prop="category_id">
         <el-radio v-model="form.category_id" label="1">热映</el-radio>
         <el-radio v-model="form.category_id" label="2">待映</el-radio>
         <el-radio v-model="form.category_id" label="3">经典</el-radio>
-      </el-form-item>
-      <el-form-item label="电影名称" prop="title">
+      </el-form-item> -->
+      <el-form-item label="图书名称" prop="title">
         <el-input v-model="form.title" type="text"></el-input>
       </el-form-item>
-      <el-form-item label="电影类型" prop="type">
+      <el-form-item label="图书类型" prop="type">
         <el-select
           style="width: 100%"
           v-model="form.type"
           multiple
-          placeholder="请选择电影类型"
+          placeholder="请选择图书类型"
         >
           <el-option
             v-for="item in types"
@@ -44,10 +44,10 @@
           </el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="电影主演" prop="star_actor">
+      <el-form-item label="图书主演" prop="book_author">
         <el-select
           style="width: 100%"
-          v-model="form.star_actor"
+          v-model="form.book_author"
           multiple
           filterable
           remote
@@ -57,10 +57,10 @@
           :loading="loading"
         >
           <el-option
-            v-for="item in actors"
+            v-for="item in authors"
             :key="item.id"
-            :label="item.actor_name"
-            :value="item.actor_name"
+            :label="item.author_name"
+            :value="item.author_name"
           ></el-option>
         </el-select>
       </el-form-item>
@@ -74,13 +74,13 @@
         >
         </el-date-picker>
       </el-form-item>
-      <el-form-item label="电影评分" prop="score">
+      <el-form-item label="图书评分" prop="score">
         <el-input v-model="form.score" type="text"></el-input>
       </el-form-item>
-      <el-form-item label="电影时长" prop="duration">
+      <el-form-item label="图书时长" prop="duration">
         <el-input v-model="form.duration" type="text"></el-input>
       </el-form-item>
-      <el-form-item label="电影简介" prop="description">
+      <el-form-item label="图书简介" prop="description">
         <el-input
           v-model="form.description"
           type="textarea"
@@ -101,15 +101,14 @@ import httpApi from "@/http";
 export default {
   data() {
     return {
-      types: [], // 保存所有电影类型
+      types: [], // 保存所有图书类型
       form: {
         // 保存当前表单收集到的数据
-        id: this.$route.params.id, //获取到电影的id
-        category_id: "1", // 类别ID  热映=1  待映=2  经典=3
+        id: this.$route.params.id, //获取到图书的id
         cover: "",
         title: "",
         type: [],
-        star_actor: [],
+        book_author: [],
         showingon: "",
         score: "",
         description: "",
@@ -127,10 +126,10 @@ export default {
         type: [
           { required: true, message: "该字段不能为空", trigger: "change" },
         ],
-        starActor: [
+        bookActor: [
           { required: true, message: "该字段不能为空", trigger: "change" },
         ],
-        star_actor: [
+        book_author: [
           { required: true, message: "该字段不能为空", trigger: "change" },
         ],
         showingon: [
@@ -144,7 +143,7 @@ export default {
           { required: true, message: "该字段不能为空", trigger: "blur" },
         ],
       },
-      actors: [], // 保存模糊查询后的演员列表
+      authors: [], // 保存模糊查询后的作者列表
       loading: false, // 表示下拉列表是否正在加载
     };
   },
@@ -153,9 +152,9 @@ export default {
     /** 提交表单 */
     submit() {
       // 处理一下form中的字段，改为服务端需要的格式（字符串）
-      this.form.star_actor = this.form.star_actor.join("／");
+      this.form.book_author = this.form.book_author.join("／");
       this.form.type = this.form.type.join("／");
-      this.form.actor = undefined;
+      this.form.author = undefined;
       this.form.director = undefined;
       this.form.thumb = undefined;
       console.log(this.form);
@@ -175,13 +174,13 @@ export default {
       });
     },
 
-    /** 当在el-select中输入内容，需要异步搜索演员时 */
+    /** 当在el-select中输入内容，需要异步搜索作者时 */
     remoteMethod(query) {
-      // 演员名称关键字  query
-      httpApi.actorAPI.queryByNameLike({ name: query }).then((res) => {
-        console.log("演员列表", res);
-        // 将 演员列表 res.data.data 显示在下拉列表中
-        this.actors = res.data.data;
+      // 作者名称关键字  query
+      httpApi.authorAPI.queryByNameLike({ name: query }).then((res) => {
+        console.log("作者列表", res);
+        // 将 作者列表 res.data.data 显示在下拉列表中
+        this.authors = res.data.data;
       });
     },
 
@@ -207,7 +206,7 @@ export default {
     /** 组件挂载完毕后执行 */
     initMovieTypes() {
       httpApi.movieAPI.queryTypes().then((res) => {
-        console.log("加载所有电影类别", res);
+        console.log("加载所有图书类别", res);
         // 渲染option列表
         this.types = res.data.data;
       });
@@ -216,15 +215,15 @@ export default {
 
   /** 组件挂载完毕后执行 */
   mounted() {
-    //获取列表页传过来的参数:电影id,通过id才可以获取详细数据
+    //获取列表页传过来的参数:图书id,通过id才可以获取详细数据
     httpApi.movieAPI.queryById({ id: this.form.id }).then((res) => {
-      console.log("通过id查询的电影详情是", res);
+      console.log("通过id查询的图书详情是", res);
       this.form = res.data.data;
-      this.form.star_actor = this.form.star_actor.split("／");
+      this.form.book_author = this.form.book_author.split("／");
       this.form.type = this.form.type.split("／");
     });
 
-    // 初始化电影类型列表  更新下拉列表框
+    // 初始化图书类型列表  更新下拉列表框
     this.initMovieTypes();
   },
 };
