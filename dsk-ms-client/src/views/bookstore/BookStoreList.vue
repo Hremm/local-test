@@ -2,17 +2,17 @@
   <div>
     <!-- 地图容器 -->
     <div id="main" style="height: 260px; border: 1px solid #666"></div>
-    <el-divider content-position="left">电影院列表</el-divider>
+    <el-divider content-position="left">书店列表</el-divider>
 
     <!-- 表格 -->
     <el-table :data="cinemas">
       <el-table-column
         prop="cinema_name"
         width="150px"
-        label="影院名称"
+        label="书店名称"
       ></el-table-column>
-      <el-table-column prop="address" label="影院地址"></el-table-column>
-      <el-table-column width="250px" label="影院位置">
+      <el-table-column prop="address" label="书店地址"></el-table-column>
+      <el-table-column width="250px" label="书店位置">
         <template slot-scope="scope">
           {{ scope.row.province }}
           {{ scope.row.city }}
@@ -74,10 +74,10 @@ export default {
       this.map.setZoomAndCenter(15, [lng, lat], false, 700);
     },
 
-    //删除影院
+    //删除书店
     del(id) {
       console.log("点击了删除", id);
-      this.$confirm("此操作将永久删除该影院数据, 是否继续?", "提示", {
+      this.$confirm("此操作将永久删除该书店数据, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
@@ -140,9 +140,9 @@ export default {
     /** 初始化数据 */
     initData() {
       httpApi.cinemaApi.queryAll().then((res) => {
-        console.log("加载电影院列表", res);
+        console.log("加载书店列表", res);
         this.cinemas = res.data.data;
-        //此处可以为每一家电影院都添加一个点标记到地图上
+        //此处可以为每一家书店都添加一个点标记到地图上
         this.cinemas.forEach((item) => {
           let lng = item.longitude;
           let lat = item.latitude;

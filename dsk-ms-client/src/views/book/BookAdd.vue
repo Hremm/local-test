@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <!-- 新增电影的表单 -->
+    <!-- 新增图书的表单 -->
     <el-form
       label-width="120px"
       style="width: 600px"
@@ -21,20 +21,20 @@
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
       </el-form-item>
-      <el-form-item label="电影类别" prop="categoryId">
+      <el-form-item label="图书类别" prop="categoryId">
         <el-radio v-model="form.categoryId" label="1">热映</el-radio>
         <el-radio v-model="form.categoryId" label="2">待映</el-radio>
         <el-radio v-model="form.categoryId" label="3">经典</el-radio>
       </el-form-item>
-      <el-form-item label="电影名称" prop="title">
+      <el-form-item label="图书名称" prop="title">
         <el-input v-model="form.title" type="text"></el-input>
       </el-form-item>
-      <el-form-item label="电影类型" prop="type">
+      <el-form-item label="图书类型" prop="type">
         <el-select
           style="width: 100%"
           v-model="form.type"
           multiple
-          placeholder="请选择电影类型"
+          placeholder="请选择图书类型"
         >
           <el-option
             v-for="item in types"
@@ -45,7 +45,7 @@
           </el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="电影主演" prop="starActor">
+      <el-form-item label="图书主演" prop="starActor">
         <el-select
           style="width: 100%"
           v-model="form.starActor"
@@ -75,13 +75,13 @@
         >
         </el-date-picker>
       </el-form-item>
-      <el-form-item label="电影评分" prop="score">
+      <el-form-item label="图书评分" prop="score">
         <el-input v-model="form.score" type="text"></el-input>
       </el-form-item>
-      <el-form-item label="电影时长" prop="duration">
+      <el-form-item label="图书时长" prop="duration">
         <el-input v-model="form.duration" type="text"></el-input>
       </el-form-item>
-      <el-form-item label="电影简介" prop="description">
+      <el-form-item label="图书简介" prop="description">
         <el-input
           v-model="form.description"
           type="textarea"
@@ -102,7 +102,7 @@ import httpApi from "@/http";
 export default {
   data() {
     return {
-      types: [], // 保存所有电影类型
+      types: [], // 保存所有图书类型
       form: {
         // 保存当前表单收集到的数据
         categoryId: "1", // 类别ID  热映=1  待映=2  经典=3
@@ -151,20 +151,20 @@ export default {
       this.form.type = this.form.type.join("／");
       console.log(this.form);
       // // 若表单数据收集完毕，发送新增请求即可
-      // httpApi.movieAPI.add(this.form).then((res) => {
+      // httpApi.bookAPI.add(this.form).then((res) => {
       //   if (res.data.code == 200) {
       //     // 跳转到列表
-      //     this.$router.push("/home/movie-list");
+      //     this.$router.push("/home/book-list");
       // 验证表单是否符合rules的要求
       this.$refs["form"].validate((valid) => {
         if (valid) {
           // 表单验证通过
           // 若表单数据收集完毕，发送新增请求即可
-          httpApi.movieAPI.add(this.form).then((res) => {
+          httpApi.bookAPI.add(this.form).then((res) => {
             if (res.data.code == 200) {
               // 跳转到列表
               this.$message.success("恭喜，添加成功");
-              this.$router.push("/home/movie-list");
+              this.$router.push("/home/book-list");
             }
           });
         }
@@ -202,8 +202,8 @@ export default {
 
     /** 组件挂载完毕后执行 */
     initMovieTypes() {
-      httpApi.movieAPI.queryTypes().then((res) => {
-        console.log("加载所有电影类别", res);
+      httpApi.bookAPI.queryTypes().then((res) => {
+        console.log("加载所有图书类别", res);
         // 渲染option列表
         this.types = res.data.data;
       });
@@ -212,7 +212,7 @@ export default {
 
   /** 组件挂载完毕后执行 */
   mounted() {
-    // 初始化电影类型列表  更新下拉列表框
+    // 初始化图书类型列表  更新下拉列表框
     this.initMovieTypes();
   },
 };

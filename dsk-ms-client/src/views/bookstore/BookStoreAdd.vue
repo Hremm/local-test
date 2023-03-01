@@ -7,7 +7,7 @@
       :rules="rules"
       :model="form"
     >
-      <el-form-item label="电影院名称" prop="cinema_name">
+      <el-form-item label="书店名称" prop="cinema_name">
         <el-input type="text" v-model="form.cinema_name"></el-input>
       </el-form-item>
       <el-form-item label="选择位置">
@@ -42,7 +42,7 @@
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submit">新增电影院</el-button>
+        <el-button type="primary" @click="submit">新增书店</el-button>
         <el-button>重置</el-button>
       </el-form-item>
     </el-form>
@@ -97,12 +97,12 @@ export default {
   methods: {
     submit() {
       this.form.tags = this.form.tags.join(" / ");
-      // 发送请求，添加电影院信息
+      // 发送请求，添加书店信息
       this.$refs["form"].validate((valid) => {
         if (valid) {
-          // 发送请求，添加电影院信息
+          // 发送请求，添加书店信息
           httpApi.cinemaApi.add(this.form).then((res) => {
-            console.log("新增电影院", res);
+            console.log("新增书店", res);
             if (res.data.code == 200) {
               this.$message.success("恭喜，影院开业大吉！");
               this.$router.push("/home/cinema-list");

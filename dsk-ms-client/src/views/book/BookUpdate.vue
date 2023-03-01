@@ -44,7 +44,7 @@
           </el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="图书主演" prop="book_author">
+      <el-form-item label="图书作者" prop="book_author">
         <el-select
           style="width: 100%"
           v-model="form.book_author"
@@ -64,7 +64,7 @@
           ></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="上映时间" prop="showingon">
+      <el-form-item label="发布日期" prop="showingon">
         <el-date-picker
           style="width: 100%"
           v-model="form.showingon"
@@ -77,9 +77,9 @@
       <el-form-item label="图书评分" prop="score">
         <el-input v-model="form.score" type="text"></el-input>
       </el-form-item>
-      <el-form-item label="图书时长" prop="duration">
+      <!-- <el-form-item label="图书时长" prop="duration">
         <el-input v-model="form.duration" type="text"></el-input>
-      </el-form-item>
+      </el-form-item> -->
       <el-form-item label="图书简介" prop="description">
         <el-input
           v-model="form.description"
