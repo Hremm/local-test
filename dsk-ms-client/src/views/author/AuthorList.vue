@@ -13,9 +13,9 @@
         <el-button type="primary" @click="search">查询</el-button>
       </el-form-item>
     </el-form>
-    <el-divider content-position="left">演员列表</el-divider>
+    <el-divider content-position="left">作者列表</el-divider>
 
-    <!-- 呈现演员列表 -->
+    <!-- 呈现作者列表 -->
     <person
       v-for="item in authors"
       :key="item.id"
@@ -37,7 +37,7 @@ export default {
 
   data() {
     return {
-      authors: [], // 存储演员列表
+      authors: [], // 存储作者列表
       name: "", // 绑定姓名输入框value
     };
   },
@@ -51,16 +51,16 @@ export default {
     /** 捕获到用户点了叉子 */
     deleteAuthor(id) {
       console.log("在父组件中 捕获到了用户点了叉子:id=" + id);
-      // 发送请求，删除该演员
+      // 发送请求，删除该作者
 
-      this.$confirm("此操作将永久删除该演员, 是否继续?", "提示", {
+      this.$confirm("此操作将永久删除该作者, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
       })
         .then(() => {
           httpApi.authorAPI.del({ id }).then((res) => {
-            console.log("删除演员结果", res);
+            console.log("删除作者结果", res);
             if (res.data.code == 200) {
               this.search();
             }
@@ -79,7 +79,7 @@ export default {
 
       // let url = "http://localhost:3060/book-author/del";
       // myaxios.post(url, { id }).then((res) => {
-      //   console.log("删除演员结果", res);
+      //   console.log("删除作者结果", res);
       //   if (res.data.code == 200) {
       //     this.search();
       //   }
@@ -93,13 +93,13 @@ export default {
         // let url = "http://localhost:3060/book-authors/name";
         // let params = { name: this.name };
         // myaxios.post(url, params).then((res) => {
-        //   console.log("查询到的演员列表如下", res);
+        //   console.log("查询到的作者列表如下", res);
         //   // 更新列表
         //   this.authors = res.data.data;
         // });
         let params = { name: this.name };
         httpApi.authorAPI.queryByNameLike(params).then((res) => {
-          console.log("查询到的演员列表如下", res);
+          console.log("查询到的作者列表如下", res);
           this.authors = res.data.data;
         });
       } else {
@@ -114,12 +114,12 @@ export default {
       // //  url = "https://web.codeboy.com/bmdapi/book-authors"
       // let params = { page: 1, pagesize: 100 };
       // myaxios.get(url, params).then((res) => {
-      //   console.log("加载演员列表结果", res);
-      //   // 将res.data.data中存储的演员列表存入this.authors
+      //   console.log("加载作者列表结果", res);
+      //   // 将res.data.data中存储的作者列表存入this.authors
       //   this.authors = res.data.data;
       // });
       httpApi.authorAPI.queryAllAuthor().then((res) => {
-        console.log("加载演员列表结果", res);
+        console.log("加载作者列表结果", res);
         this.authors = res.data.data;
       });
     },
