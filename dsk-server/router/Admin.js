@@ -33,7 +33,7 @@ router.post("/user/login", (req, resp)=>{
       throw error;
     }
     if(result.length==0){
-      resp.send(Response.error(1001, '账号密码输入错误'));
+      resp.send(Response.error(1001, '账号或密码输入错误'));
     }else{
       // 获取登录用户对象
       let user = result[0]

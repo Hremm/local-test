@@ -187,26 +187,6 @@ export default {
           },
         ],
       },
-      // {
-      //   type: "sub-memu",
-      //   link: "2",
-      //   title: "导演管理",
-      //   icon: "el-icon-user",
-      //   children: [
-      //     {
-      //       type: "memu-item",
-      //       link: "/home/director-list",
-      //       title: "导演列表",
-      //       icon: "el-icon-user",
-      //     },
-      //     {
-      //       type: "memu-item",
-      //       link: "/home/director-add",
-      //       title: "新增导演",
-      //       icon: "el-icon-plus",
-      //     },
-      //   ],
-      // },
       {
         type: "sub-memu",
         link: "2",
