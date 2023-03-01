@@ -20,11 +20,11 @@
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
       </el-form-item>
-      <!-- <el-form-item label="图书类别" prop="category_id">
-        <el-radio v-model="form.category_id" label="1">热映</el-radio>
-        <el-radio v-model="form.category_id" label="2">待映</el-radio>
-        <el-radio v-model="form.category_id" label="3">经典</el-radio>
-      </el-form-item> -->
+      <el-form-item label="图书类别" prop="type_id">
+        <el-radio v-model="form.type_id" label="1">文学作品</el-radio>
+        <el-radio v-model="form.type_id" label="2">网络小说</el-radio>
+        <el-radio v-model="form.type_id" label="3">漫画绘本</el-radio>
+      </el-form-item>
       <el-form-item label="图书名称" prop="title">
         <el-input v-model="form.title" type="text"></el-input>
       </el-form-item>
@@ -44,11 +44,10 @@
           </el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="图书作者" prop="book_author">
+      <el-form-item label="图书作者" prop="author_name">
         <el-select
           style="width: 100%"
-          v-model="form.book_author"
-          multiple
+          v-model="form.author_name"
           filterable
           remote
           reserve-keyword
@@ -64,10 +63,10 @@
           ></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="发布日期" prop="showingon">
+      <el-form-item label="发布日期" prop="publish_date">
         <el-date-picker
           style="width: 100%"
-          v-model="form.showingon"
+          v-model="form.publish_date"
           type="date"
           placeholder="选择日期"
           value-format="yyyy-MM-dd"
@@ -77,9 +76,6 @@
       <el-form-item label="图书评分" prop="score">
         <el-input v-model="form.score" type="text"></el-input>
       </el-form-item>
-      <!-- <el-form-item label="图书时长" prop="duration">
-        <el-input v-model="form.duration" type="text"></el-input>
-      </el-form-item> -->
       <el-form-item label="图书简介" prop="description">
         <el-input
           v-model="form.description"
@@ -104,21 +100,20 @@ export default {
       types: [], // 保存所有图书类型
       form: {
         // 保存当前表单收集到的数据
-        id: this.$route.params.id, //获取到图书的id
+        bid: this.$route.params.id, //获取到图书的id
         cover: "",
         title: "",
         type: [],
-        book_author: [],
-        showingon: "",
+        author_name: "",
+        publish_date: "",
         score: "",
         description: "",
-        duration: "",
       },
       rules: {
-        categoryId: [
+        typeId: [
           { required: true, message: "该字段不能为空", trigger: "blur" },
         ],
-        category_id: [
+        type_id: [
           { required: true, message: "该字段不能为空", trigger: "blur" },
         ],
         cover: [{ required: true, message: "该字段不能为空", trigger: "blur" }],
@@ -126,20 +121,17 @@ export default {
         type: [
           { required: true, message: "该字段不能为空", trigger: "change" },
         ],
-        bookActor: [
+        bookAuthor: [
           { required: true, message: "该字段不能为空", trigger: "change" },
         ],
-        book_author: [
+        author_name: [
           { required: true, message: "该字段不能为空", trigger: "change" },
         ],
-        showingon: [
+        publish_date: [
           { required: true, message: "该字段不能为空", trigger: "blur" },
         ],
         score: [{ required: true, message: "该字段不能为空", trigger: "blur" }],
         description: [
-          { required: true, message: "该字段不能为空", trigger: "blur" },
-        ],
-        duration: [
           { required: true, message: "该字段不能为空", trigger: "blur" },
         ],
       },
@@ -152,22 +144,18 @@ export default {
     /** 提交表单 */
     submit() {
       // 处理一下form中的字段，改为服务端需要的格式（字符串）
-      this.form.book_author = this.form.book_author.join("／");
       this.form.type = this.form.type.join("／");
-      this.form.author = undefined;
-      this.form.director = undefined;
-      this.form.thumb = undefined;
       console.log(this.form);
       // 验证表单是否符合rules的要求
       this.$refs["form"].validate((valid) => {
         if (valid) {
           // 表单验证通过
           // 若表单数据收集完毕，发送修改请求即可
-          httpApi.movieAPI.update(this.form).then((res) => {
+          httpApi.bookAPI.update(this.form).then((res) => {
             if (res.data.code == 200) {
               // 跳转到列表
               this.$message.success("恭喜，更新成功");
-              this.$router.push("/home/movie-list");
+              this.$router.push("/home/book-list");
             }
           });
         }
@@ -204,8 +192,8 @@ export default {
     },
 
     /** 组件挂载完毕后执行 */
-    initMovieTypes() {
-      httpApi.movieAPI.queryTypes().then((res) => {
+    initBookTypes() {
+      httpApi.bookAPI.queryTypes().then((res) => {
         console.log("加载所有图书类别", res);
         // 渲染option列表
         this.types = res.data.data;
@@ -215,16 +203,16 @@ export default {
 
   /** 组件挂载完毕后执行 */
   mounted() {
+    console.log(this.form.bid);
     //获取列表页传过来的参数:图书id,通过id才可以获取详细数据
-    httpApi.movieAPI.queryById({ id: this.form.id }).then((res) => {
+    httpApi.bookAPI.queryByBid({ bid: this.form.bid }).then((res) => {
       console.log("通过id查询的图书详情是", res);
       this.form = res.data.data;
-      this.form.book_author = this.form.book_author.split("／");
       this.form.type = this.form.type.split("／");
     });
 
     // 初始化图书类型列表  更新下拉列表框
-    this.initMovieTypes();
+    this.initBookTypes();
   },
 };
 </script>

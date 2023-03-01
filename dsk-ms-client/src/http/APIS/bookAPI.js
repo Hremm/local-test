@@ -44,7 +44,7 @@ const bookAPI = {
    * 通过id查询图书详情
    * @param {obj} params
    */
-  queryById(params) {
+  queryByBid(params) {
     let url = dskURL + "/book_details/query";
     return myaxios.get(url, params);
   },
