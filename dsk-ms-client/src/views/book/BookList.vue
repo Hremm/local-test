@@ -35,8 +35,9 @@
       <el-table-column label="所属类别"></el-table-column>
       <el-table-column label="操作"></el-table-column> -->
       <el-table-column label="图书名称" prop="title" ></el-table-column>
-      <el-table-column label="作者" prop="author_name"></el-table-column>
+      <el-table-column align="center" label="作者" prop="author_name"></el-table-column>
       <el-table-column
+      align="center"
         label="发布日期"
         width="120px"
         prop="publish_date"
