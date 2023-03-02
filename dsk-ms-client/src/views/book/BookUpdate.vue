@@ -101,7 +101,7 @@ export default {
       form: {
         // 保存当前表单收集到的数据
         bid: this.$route.params.id, //获取到图书的id
-        type_id:"1",
+        type_id: "1",
         cover: "",
         title: "",
         type: [],
@@ -111,9 +111,6 @@ export default {
         description: "",
       },
       rules: {
-        typeId: [
-          { required: true, message: "该字段不能为空", trigger: "blur" },
-        ],
         type_id: [
           { required: true, message: "该字段不能为空", trigger: "blur" },
         ],

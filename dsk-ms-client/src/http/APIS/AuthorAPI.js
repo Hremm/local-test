@@ -1,15 +1,15 @@
-//封装演员模块相关接口
+//封装作者模块相关接口
 import myaxios from "../MyAxios.js";
 import baseURL from "../baseURL.js";
 const dskURL = baseURL.dskURL;
 const authorAPI = {
-  //查询所有演员，返回Promise对象
+  //查询所有作者，返回Promise对象
   queryAllAuthor() {
     let url = dskURL + "/book_authors";
-    return myaxios.get(url, { page: 1, pagesize: 100});
+    return myaxios.get(url, { page: 1, pagesize: 100 });
   },
   /**
-   *通过姓名模糊查询演员
+   *通过姓名模糊查询作者
    * @param {Object} params 请求参数对象。例如：{name：'先辈'}
    * @return Promise
    */
@@ -18,8 +18,8 @@ const authorAPI = {
     return myaxios.post(url, params);
   },
   /**
-   *添加演员
-   * @param {Obj} params 参数对象 例如 {authorName:演员名称, authorAvatar:演员头像}
+   *添加作者
+   * @param {Obj} params 参数对象 例如 {authorName:作者名称, authorAvatar:作者头像}
    * @return Promise
    */
   add(params) {
@@ -27,8 +27,8 @@ const authorAPI = {
     return myaxios.post(url, params);
   },
   /**
-   *删除演员
-   * @param {obj} params {id:演员id}
+   *删除作者
+   * @param {obj} params {id:作者id}
    * @return Promise
    */
   del(params) {
