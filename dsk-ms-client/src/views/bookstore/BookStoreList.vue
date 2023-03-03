@@ -5,9 +5,9 @@
     <el-divider content-position="left">书店列表</el-divider>
 
     <!-- 表格 -->
-    <el-table :data="cinemas">
+    <el-table :data="bookstores">
       <el-table-column
-        prop="cinema_name"
+        prop="bookstore_name"
         width="150px"
         label="书店名称"
       ></el-table-column>
@@ -33,7 +33,7 @@
             type="info"
             icon="el-icon-video-camera-solid"
             circle
-            @click="$router.push('/home/cinema-room-list/' + scope.row.id)"
+            @click="$router.push('/home/bookstore-room-list/' + scope.row.id)"
           ></el-button>
           <el-button
             size="small"
@@ -62,28 +62,28 @@ import httpApi from "@/http/index";
 export default {
   data() {
     return {
-      cinemas: [],
+      bookstores: [],
       AMap: null,
     };
   },
   methods: {
-    moveTo(cinema) {
-      console.log(cinema);
-      let lng = cinema.longitude;
-      let lat = cinema.latitude;
+    moveTo(bookstore) {
+      console.log(bookstore);
+      let lng = bookstore.longitude;
+      let lat = bookstore.latitude;
       this.map.setZoomAndCenter(15, [lng, lat], false, 700);
     },
 
     //删除书店
     del(id) {
       console.log("点击了删除", id);
-      this.$confirm("此操作将永久删除该书店数据, 是否继续?", "提示", {
+      this.$confirm("此操作将永久删除该书店, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
       })
         .then(() => {
-          httpApi.cinemaApi.del({ id: id }).then((res) => {
+          httpApi.bookstoreApi.del({ id: id }).then((res) => {
             console.log("删除成功了,删除的结果如下", res);
             if (res.data.code == 200) {
               this.initData();
@@ -139,18 +139,18 @@ export default {
     },
     /** 初始化数据 */
     initData() {
-      httpApi.cinemaApi.queryAll().then((res) => {
+      httpApi.bookstoreApi.queryAll().then((res) => {
         console.log("加载书店列表", res);
-        this.cinemas = res.data.data;
+        this.bookstores = res.data.data;
         //此处可以为每一家书店都添加一个点标记到地图上
-        this.cinemas.forEach((item) => {
+        this.bookstores.forEach((item) => {
           let lng = item.longitude;
           let lat = item.latitude;
           // 创建一个 Marker 实例：
 
           var marker = new AMap.Marker({
             position: new AMap.LngLat(lng, lat), // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
-            title: item.cinema_name,
+            title: item.bookstore_name,
           });
 
           // 将创建的点标记添加到已有的地图实例：

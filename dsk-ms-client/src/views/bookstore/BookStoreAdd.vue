@@ -7,8 +7,8 @@
       :rules="rules"
       :model="form"
     >
-      <el-form-item label="书店名称" prop="cinema_name">
-        <el-input type="text" v-model="form.cinema_name"></el-input>
+      <el-form-item label="书店名称" prop="bookstore_name">
+        <el-input type="text" v-model="form.bookstore_name"></el-input>
       </el-form-item>
       <el-form-item label="选择位置">
         <div id="container" style="height: 200px; border: 1px solid #666"></div>
@@ -31,13 +31,13 @@
       <el-form-item label="纬度" prop="latitude">
         <el-input type="text" v-model="form.latitude"></el-input>
       </el-form-item>
-      <el-form-item label="选择标签" prop="tags">
-        <el-select multiple v-model="form.tags">
+      <el-form-item label="选择类型" prop="types">
+        <el-select multiple v-model="form.types">
           <el-option
-            v-for="item in tags"
+            v-for="item in types"
             :key="item.id"
-            :label="item.tagname"
-            :value="item.tagname"
+            :label="item.typename"
+            :value="item.typename"
           ></el-option>
         </el-select>
       </el-form-item>
@@ -55,21 +55,21 @@ import httpApi from "@/http";
 export default {
   data() {
     return {
-      tags: [],
+      types: [],
       //此处不声明 map 对象，可以直接使用 this.map赋值或者采用非响应式的普通对象来存储。
       //map:null,
       form: {
-        cinema_name: "",
+        bookstore_name: "",
         address: "",
         province: "",
         city: "",
         district: "",
         longitude: "",
         latitude: "",
-        tags: [],
+        types: [],
       },
       rules: {
-        cinema_name: [
+        bookstore_name: [
           { required: true, message: "该字段不能为空", trigger: "blur" },
         ],
         address: [
@@ -88,7 +88,7 @@ export default {
         latitude: [
           { required: true, message: "该字段不能为空", trigger: "blur" },
         ],
-        tags: [
+        types: [
           { required: true, message: "该字段不能为空", trigger: "change" },
         ],
       },
@@ -96,16 +96,16 @@ export default {
   },
   methods: {
     submit() {
-      this.form.tags = this.form.tags.join(" / ");
+      this.form.types = this.form.types.join(" / ");
       // 发送请求，添加书店信息
       this.$refs["form"].validate((valid) => {
         if (valid) {
           // 发送请求，添加书店信息
-          httpApi.cinemaApi.add(this.form).then((res) => {
+          httpApi.bookstoreApi.add(this.form).then((res) => {
             console.log("新增书店", res);
             if (res.data.code == 200) {
-              this.$message.success("恭喜，影院开业大吉！");
-              this.$router.push("/home/cinema-list");
+              this.$message.success("恭喜，新增成功!");
+              this.$router.push("/home/bookstore-list");
             }
           });
         }
@@ -147,9 +147,9 @@ export default {
   mounted() {
     //DOM初始化完成进行地图初始化
     this.initMap();
-    httpApi.cinemaApi.queryTypes().then((res) => {
-      console.log("加载电影标签列表", res);
-      this.tags = res.data.data;
+    httpApi.bookstoreApi.queryTypes().then((res) => {
+      console.log("加载书店类型列表", res);
+      this.types = res.data.data;
     });
   },
 };
