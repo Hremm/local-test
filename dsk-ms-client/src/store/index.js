@@ -6,20 +6,20 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   //默认情况下,用户未登录,需要在登录后,修改对象数据
   state: {
-    user: JSON.parse(sessionStorage.getItem("user")),
+    admin: JSON.parse(sessionStorage.getItem("admin")),
     city: "郑州",
     token: sessionStorage.getItem("token"),
   },
   getters: {},
   mutations: {
-    //声明一个方法,用于修改state.user数据;
+    //声明一个方法,用于修改state.admin数据;
     //通过$store.commit('updateUser')
     //vuex会接收到该请求,找到updateUser方法,并且执行它
     //vuex会自动传入参数:($store.state,用户传入的参数)
     updateUser(state, payload) {
-      state.user = payload;
+      state.admin = payload;
       //为了数据的持久化保存,还需要向storage中存一份
-      sessionStorage.setItem("user", JSON.stringify(payload));
+      sessionStorage.setItem("admin", JSON.stringify(payload));
     },
     saveToken(state, token) {
       state.token = token;

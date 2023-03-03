@@ -125,11 +125,11 @@
           </el-breadcrumb>
           
 
-          <template v-if="user">
-            <span>{{ user.username }}</span>
+          <template v-if="admin">
+            <span>{{ admin.username }}</span>
           </template>
 
-          <!-- <span>{{ user.username }}</span> -->
+          <!-- <span>{{ admin.username }}</span> -->
         </el-header>
 
           <tags></tags>
@@ -162,7 +162,7 @@ export default {
     },
   }, */
   computed: {
-    ...mapState(["user", "cityname"]),
+    ...mapState(["admin", "cityname"]),
   },
   //组件挂载完毕后
   mounted() {

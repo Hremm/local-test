@@ -85,9 +85,8 @@ const routes = [
     ],
   },
   {
-    path: "/user/login",
-    name: "登录",
-    component: () => import("../views/user/Login.vue"),
+    path: "/admin/login",
+    component: () => import("../views/admin/Login.vue"),
   },
 ];
 
@@ -101,13 +100,13 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   console.log(to);
-  if (to.path == "/user/login") {
+  if (to.path == "/admin/login") {
     next();
   } else {
-    if (store.state.user) {
+    if (store.state.admin) {
       next();
     } else {
-      router.push("/user.login");
+      router.push("/admin.login");
     }
   }
 });

@@ -71,7 +71,7 @@ export default {
 
             if (res.data.code == 200) {
               //将对象存入vuex
-              this.$store.commit("updateUser", res.data.data.user);
+              this.$store.commit("updateUser", res.data.data.admin);
 
               //token存入vuex中
               this.$store.commit("saveToken", res.data.data.token);
