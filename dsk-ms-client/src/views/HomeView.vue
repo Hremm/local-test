@@ -132,7 +132,7 @@
           <!-- <span>{{ user.username }}</span> -->
         </el-header>
 
-          
+          <tags></tags>
           
         <el-main>
           <!-- 二级路由所需要显示的内容 -->
