@@ -13,11 +13,11 @@ const SECRET_KEY = 'JWT_SECRET_KEY'
 /**
  * 处理登录业务
  */
-router.post("/admin/login", (req, resp)=>{
-  let{username, password} = req.body
+router.post("/user/login", (req, resp)=>{
+  let{user_name, password} = req.body
   // 表单验证
   let schema = Joi.object({
-    username: Joi.string().required().pattern(new RegExp('^\\w{3,15}$')), // 必填项
+    user_name: Joi.string().required().pattern(new RegExp('^\\w{3,15}$')), // 必填项
     password: Joi.string().required().pattern(new RegExp('^\\w{6,15}$')), // 必填项
   });
   let { error, value } = schema.validate(req.body);
@@ -26,8 +26,8 @@ router.post("/admin/login", (req, resp)=>{
     return; // 结束
   }
   // 查询数据库，账号密码是否填写正确
-  let sql = "select * from admin where username=? and password=MD5(?)"
-  pool.query(sql, [username, password], (error, result)=>{
+  let sql = "select * from book_user where user_name=? and password=MD5(?)"
+  pool.query(sql, [user_name, password], (error, result)=>{
     if (error) {
       resp.send(Response.error(500, error));
       throw error;
@@ -36,13 +36,13 @@ router.post("/admin/login", (req, resp)=>{
       resp.send(Response.error(1001, '账号或密码输入错误'));
     }else{
       // 获取登录用户对象
-      let admin = result[0]
+      let user = result[0]
       // 为该用户颁发一个token字符串，未来该客户端若做发送其他请求，则需要在请求Header中携带token，完成状态管理。
-      let payload = {id: admin.id, username: admin.username}
+      let payload = {id: user.id, user_name: user.user_name}
       let token = jwt.sign(payload, SECRET_KEY, {expiresIn: '1d'})
       // 返回user对象与token字符串
-      admin.password = undefined
-      resp.send(Response.ok({admin, token}));
+      user.password = undefined
+      resp.send(Response.ok({user, token}));
     
     }
   })

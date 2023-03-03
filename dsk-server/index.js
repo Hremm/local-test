@@ -20,8 +20,8 @@ app.use(express.urlencoded());
 
 // 自定义token全局验证中间件
 const tokenTools = function (req, resp, next) {
-  // 若请求路径是 /user/login 则不拦截，直接向后执行即可
-  if (req.path == '/user/login') {
+  // 若请求路径是 /admin/login 则不拦截，直接向后执行即可
+  if (req.path == '/admin/login'||'/user/login') {
     next();
     return;
   }
@@ -53,7 +53,7 @@ app.use(require("./router/Admin.js"));
 app.use(require("./router/BookAuthor.js"))
 app.use(require('./router/BookDetails.js'))
 app.use(require('./router/BookStore.js'))
-
+app.use(require("./router/User.js"));
 /**
  * 接口， 处理/请求
  */
