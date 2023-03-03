@@ -85,7 +85,7 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submit">立即更新</el-button>
-        <el-button>取消</el-button>
+        <el-button  @click="returnPage">取消</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -139,6 +139,14 @@ export default {
   },
 
   methods: {
+    returnPage(){
+      if (window.history.length <= 1) {
+        this.$router.push({ path: "/system/storageManagement" });
+        return false;
+      } else {
+        this.$router.go(-1);
+      }
+    },
     /** 提交表单 */
     submit() {
       // 处理一下form中的字段，改为服务端需要的格式（字符串）

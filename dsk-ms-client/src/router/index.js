@@ -17,6 +17,7 @@ const routes = [
     children: [
       {
         path: "index",
+        name:"首页",
         component: () => import("../views/index.vue"),
         meta: {
           thumb: ["首页"],
@@ -73,27 +74,6 @@ const routes = [
           thumb: ["书店管理", "书店列表"],
         },
       },
-     /*  {
-        path: "bookstore-room-list/:bookstoreId",
-        component: () => import("../views/bookstore/BookStoreSRoomList.vue"),
-        meta: {
-          thumb: ["电影院管理", "电影院列表", "放映厅列表"],
-        },
-      }, */
-      /* {
-        path: "publish_date-plan-add/:roomId",
-        component: () => import("../views/bookstore/ShowingonPlanAdd.vue"),
-        meta: {
-          thumb: ["电影院管理", "电影院列表", "放映厅列表", "新增排片计划"],
-        },
-      },
-      {
-        path: "publish_date-plan-list/:roomId",
-        component: () => import("../views/bookstore/ShowingonPlanList.vue"),
-        meta: {
-          thumb: ["电影院管理", "电影院列表", "放映厅列表", "排片计划列表"],
-        },
-      }, */
      
     ],
   },

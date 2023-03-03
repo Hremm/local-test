@@ -25,7 +25,7 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submit()">立即新增</el-button>
-        <el-button>取消</el-button>
+        <el-button @click="cancelExpert('form')">取消</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -52,6 +52,10 @@ export default {
   },
 
   methods: {
+    //取消清空表单
+    cancelExpert(form){
+      this.$refs[form].resetFields();
+    },
     /** 提交表单 */
     submit() {
       // 验证表单，只有验证通过才发请求

@@ -123,6 +123,7 @@
               item
             }}</el-breadcrumb-item>
           </el-breadcrumb>
+          
 
           <template v-if="user">
             <span>{{ user.username }}</span>
@@ -131,6 +132,8 @@
           <!-- <span>{{ user.username }}</span> -->
         </el-header>
 
+          
+          
         <el-main>
           <!-- 二级路由所需要显示的内容 -->
           <router-view />
@@ -141,8 +144,12 @@
 </template>
 
 <script>
+import tags from "@/components/tags.vue";
 import { mapState } from "vuex";
 export default {
+  components: {
+    tags,
+  },
   data() {
     return {
       isCollapse: false,
