@@ -139,6 +139,7 @@ export default {
   },
 
   methods: {
+    //返回上一页
     returnPage(){
       if (window.history.length <= 1) {
         this.$router.push({ path: "/system/storageManagement" });

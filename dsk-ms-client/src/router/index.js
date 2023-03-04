@@ -81,6 +81,14 @@ const routes = [
           thumb: ["书店管理", "书店列表"],
         },
       },
+      {
+        path: "bookstore-update/:id",
+        name:"编辑书店",
+        component: () => import("../views/bookstore/BookStoreUpdate.vue"),
+        meta: {
+          thumb: ["书店管理", "编辑书店"],
+        },
+      },
      
     ],
   },

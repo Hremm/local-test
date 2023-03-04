@@ -11,15 +11,15 @@
         width="150px"
         label="书店名称"
       ></el-table-column>
-      <el-table-column prop="address" label="书店地址"></el-table-column>
-      <el-table-column width="250px" label="书店位置">
+      <el-table-column prop="address" label="书店地址" align="center"></el-table-column>
+      <el-table-column width="250px" label="书店位置" align="center">
         <template slot-scope="scope">
           {{ scope.row.province }}
           {{ scope.row.city }}
           {{ scope.row.district }}
         </template>
       </el-table-column>
-      <el-table-column width="180px" label="操作">
+      <el-table-column width="180px" label="操作" align="center">
         <template slot-scope="scope">
           <el-button
             size="small"
@@ -30,16 +30,10 @@
           ></el-button>
           <el-button
             size="small"
-            type="info"
-            icon="el-icon-video-camera-solid"
-            circle
-            @click="$router.push('/home/bookstore-room-list/' + scope.row.id)"
-          ></el-button>
-          <el-button
-            size="small"
             type="warning"
             icon="el-icon-edit"
             circle
+            @click="$router.push('/home/bookstore-update/' + scope.row.id)"
           ></el-button>
           <el-button
             @click="del(scope.row.id)"

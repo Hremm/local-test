@@ -48,18 +48,6 @@
       <el-table-column label="所属类别" prop="type" align="center"></el-table-column>
       <el-table-column label="操作" width="180px" align="center">
         <template slot-scope="scope">
-        <!--   <el-button
-            size="small"
-            type="success"
-            icon="el-icon-check"
-            circle
-          ></el-button>
-          <el-button
-            size="small"
-            type="info"
-            icon="el-icon-message"
-            circle
-          ></el-button> -->
           <el-button
             @click="$router.push('/home/book-update/' + scope.row.bid)"
             size="small"

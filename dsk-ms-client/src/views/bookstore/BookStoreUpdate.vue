@@ -59,6 +59,7 @@ export default {
       //此处不声明 map 对象，可以直接使用 this.map赋值或者采用非响应式的普通对象来存储。
       //map:null,
       form: {
+        id:this.$route.params.id,
         bookstore_name: "",
         address: "",
         province: "",
@@ -102,14 +103,14 @@ export default {
     //提交
     submit() {
       this.form.types = this.form.types.join(" / ");
-      // 发送请求，添加书店信息
+      // 发送请求，修改书店信息
       this.$refs["form"].validate((valid) => {
         if (valid) {
-          // 发送请求，添加书店信息
-          httpApi.bookstoreApi.add(this.form).then((res) => {
-            console.log("新增书店", res);
+          // 发送请求，修改书店信息
+          httpApi.bookstoreApi.update(this.form).then((res) => {
+            console.log("修改书店", res);
             if (res.data.code == 200) {
-              this.$message.success("恭喜，新增成功!");
+              this.$message.success("修改成功!");
               this.$router.push("/home/bookstore-list");
             }
           });
@@ -150,6 +151,13 @@ export default {
     },
   },
   mounted() {
+    console.log(this.form.id);
+    //获取列表页传过来的参数:书店id,通过id才可以获取详细数据
+    httpApi.bookstoreApi.queryByid({ id: this.form.id }).then((res) => {
+      console.log("通过id查询的书店详情是", res);
+      this.form = res.data.data;
+      this.form.types = this.form.types.split("／");
+    });
     //DOM初始化完成进行地图初始化
     this.initMap();
     httpApi.bookstoreApi.queryTypes().then((res) => {

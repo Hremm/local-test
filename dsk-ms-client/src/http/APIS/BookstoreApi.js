@@ -27,5 +27,19 @@ const bookstoreApi = {
     let url = dskURL + "/book_store/del";
     return myaxios.post(url, params);
   },
+  //编辑书店信息
+  update(params) {
+    let url = dskURL + "/book_store/update";
+    return myaxios.post(url, params);
+  },
+   /**
+   * 通过id查询图书详情
+   * @param {obj} params
+   */
+   queryByid(params) {
+    let url = dskURL + "/book_store/query";
+    return myaxios.get(url, params);
+  },
+
 };
 export default bookstoreApi;
