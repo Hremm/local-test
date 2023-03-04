@@ -1,6 +1,9 @@
 elment
 高德地图
 pm2(服务器端)
+less:
+npm i less-loader less --save-dev
+element-resize-detector
 
 'form'收集表单里的数据
 
