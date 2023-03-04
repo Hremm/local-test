@@ -11,12 +11,12 @@
  Target Server Version : 100119
  File Encoding         : 65001
 
- Date: 03/03/2023 21:13:13
+ Date: 04/03/2023 17:58:10
 */
+
 DROP DATABASE IF EXISTS `dushuke`;
 CREATE DATABASE `dushuke` DEFAULT CHARSET UTF8;
 USE `dushuke`;
-
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
@@ -109,16 +109,17 @@ CREATE TABLE `book_store`  (
   `latitude` double NOT NULL COMMENT '纬度',
   `types` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '书店支持的标签（用/分隔，例如：退/换/自习室/）',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of book_store
 -- ----------------------------
 INSERT INTO `book_store` VALUES (1, '读书阁', '河南省郑州市金水区经八路街道上都国际A座', '河南省', '郑州市', '金水区', 113.664927, 34.769863, '读书室');
-INSERT INTO `book_store` VALUES (2, '测试房', '测试省测试市测试区测试小区', '测试省', '测试市', '测试区', 113.659652, 34.772182, '借书,购书');
+INSERT INTO `book_store` VALUES (2, '测试房修改了', '河南省郑州市金水区大石桥街道金水路27号地矿大厦', '河南省', '郑州市', '金水区', 113.661807, 34.764963, '借书,购书');
 INSERT INTO `book_store` VALUES (3, '测试修改房', '修改省修改市修改区修改小区', '修改省', '修改市', '修改区', 117.33653, 45.993204, '读书室');
 INSERT INTO `book_store` VALUES (5, '测试房4', '测试省测试市测试区测试小区2', '测试省', '测试市', '测试区', 113.659652, 34.772182, '借书,购书');
 INSERT INTO `book_store` VALUES (6, '新增书店', '河南省郑州市金水区经八路街道联盛大厦A座', '河南省', '郑州市', '金水区', 113.6673, 34.77145, '借书,购书');
+INSERT INTO `book_store` VALUES (7, '新增测试', '河南省郑州市金水区花园路街道花园路84号院新闻大厦', '河南省', '郑州市', '金水区', 113.681698, 34.767566, '读书室 / 自习室');
 
 -- ----------------------------
 -- Table structure for book_store_type
@@ -198,7 +199,7 @@ CREATE TABLE `book_user`  (
 -- Records of book_user
 -- ----------------------------
 INSERT INTO `book_user` VALUES (1, NULL, 'Remm', '9c7cc2cde1939666d314378b18857721', NULL);
-INSERT INTO `book_user` VALUES (2, NULL, 'test', 'e10adc3949ba59abbe56e057f20f883e', NULL);
+INSERT INTO `book_user` VALUES (2, 'https://s1.ax1x.com/2023/02/28/ppP3g2T.jpg', 'test', 'e10adc3949ba59abbe56e057f20f883e', NULL);
 
 -- ----------------------------
 -- Table structure for user_visited_log
