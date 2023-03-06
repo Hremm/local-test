@@ -65,7 +65,7 @@ export default {
     // 监听页面刷新
     window.addEventListener("beforeunload", e => {
       console.log(this.active, this.tabList);
-      localStorage.setItem(
+      sessionStorage.setItem(
         "tagInfo2",
         JSON.stringify({
           active: this.active,
@@ -73,8 +73,8 @@ export default {
         })
       );
     });
-    let tagInfo2 = localStorage.getItem("tagInfo2")
-      ? JSON.parse(localStorage.getItem("tagInfo2"))
+    let tagInfo2 = sessionStorage.getItem("tagInfo2")
+      ? JSON.parse(sessionStorage.getItem("tagInfo2"))
       : {
           active: "/home/index",
           tabList: [
