@@ -11,9 +11,8 @@
  Target Server Version : 100119
  File Encoding         : 65001
 
- Date: 04/03/2023 17:58:10
+ Date: 07/03/2023 21:00:07
 */
-
 DROP DATABASE IF EXISTS `dushuke`;
 CREATE DATABASE `dushuke` DEFAULT CHARSET UTF8;
 USE `dushuke`;
@@ -46,7 +45,7 @@ CREATE TABLE `book_author`  (
   `author_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '作家名称\r\n',
   `author_avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '作家头像路径',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of book_author
@@ -64,6 +63,7 @@ INSERT INTO `book_author` VALUES (14, '测试员2.28', 'https://s1.ax1x.com/2023
 INSERT INTO `book_author` VALUES (16, '测试员2', 'https://s1.ax1x.com/2023/02/28/ppP8aJx.jpg');
 INSERT INTO `book_author` VALUES (17, '测试员3', 'https://s1.ax1x.com/2023/02/28/ppP8dW6.jpg');
 INSERT INTO `book_author` VALUES (20, '莫言', 'http://localhost:9000/40ee4550-1e10-4698-86a2-f809032c4663.jpg');
+INSERT INTO `book_author` VALUES (22, 'sad', 'http://localhost:9000/e31f6d42-8879-4296-a6e6-01f795971bbb.jpg');
 
 -- ----------------------------
 -- Table structure for book_details
@@ -183,23 +183,25 @@ INSERT INTO `book_type` VALUES (13, '都市');
 INSERT INTO `book_type` VALUES (27, '青春');
 
 -- ----------------------------
--- Table structure for book_user
+-- Table structure for user
 -- ----------------------------
-DROP TABLE IF EXISTS `book_user`;
-CREATE TABLE `book_user`  (
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user`  (
   `uid` int(11) NOT NULL AUTO_INCREMENT,
   `user_avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '头像地址',
   `user_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '用户名',
   `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '密码',
   `validate_code` varchar(6) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '短信验证码',
   PRIMARY KEY (`uid`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
--- Records of book_user
+-- Records of user
 -- ----------------------------
-INSERT INTO `book_user` VALUES (1, NULL, 'Remm', '9c7cc2cde1939666d314378b18857721', NULL);
-INSERT INTO `book_user` VALUES (2, 'https://s1.ax1x.com/2023/02/28/ppP3g2T.jpg', 'test', 'e10adc3949ba59abbe56e057f20f883e', NULL);
+INSERT INTO `user` VALUES (1, NULL, 'Remm', '9c7cc2cde1939666d314378b18857721', NULL);
+INSERT INTO `user` VALUES (2, 'https://s1.ax1x.com/2023/02/28/ppP3g2T.jpg', 'test', 'e10adc3949ba59abbe56e057f20f883e', NULL);
+INSERT INTO `user` VALUES (3, 'https://s1.ax1x.com/2023/02/28/ppP8aJx.jpg', 'text2', '123456', NULL);
+INSERT INTO `user` VALUES (4, 'https://s1.ax1x.com/2023/02/28/ppP8aJx.jpg', 'text2', 'e10adc3949ba59abbe56e057f20f883e', NULL);
 
 -- ----------------------------
 -- Table structure for user_visited_log
