@@ -11,8 +11,9 @@
  Target Server Version : 100119
  File Encoding         : 65001
 
- Date: 07/03/2023 21:00:07
+ Date: 08/03/2023 21:08:05
 */
+
 DROP DATABASE IF EXISTS `dushuke`;
 CREATE DATABASE `dushuke` DEFAULT CHARSET UTF8;
 USE `dushuke`;
@@ -198,10 +199,25 @@ CREATE TABLE `user`  (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (1, NULL, 'Remm', '9c7cc2cde1939666d314378b18857721', NULL);
+INSERT INTO `user` VALUES (1, 'https://s1.ax1x.com/2023/03/08/ppeyP0O.jpg', 'Remm', '9c7cc2cde1939666d314378b18857721', NULL);
 INSERT INTO `user` VALUES (2, 'https://s1.ax1x.com/2023/02/28/ppP3g2T.jpg', 'test', 'e10adc3949ba59abbe56e057f20f883e', NULL);
-INSERT INTO `user` VALUES (3, 'https://s1.ax1x.com/2023/02/28/ppP8aJx.jpg', 'text2', '123456', NULL);
-INSERT INTO `user` VALUES (4, 'https://s1.ax1x.com/2023/02/28/ppP8aJx.jpg', 'text2', 'e10adc3949ba59abbe56e057f20f883e', NULL);
+INSERT INTO `user` VALUES (3, 'https://s1.ax1x.com/2023/03/08/ppeyCnK.jpg', 'test_update', 'e10adc3949ba59abbe56e057f20f883e', NULL);
+
+-- ----------------------------
+-- Table structure for user_like
+-- ----------------------------
+DROP TABLE IF EXISTS `user_like`;
+CREATE TABLE `user_like`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) DEFAULT NULL COMMENT '用户ID',
+  `bid` int(11) DEFAULT NULL COMMENT '用户收藏的图书ID',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of user_like
+-- ----------------------------
+INSERT INTO `user_like` VALUES (1, 1, 1);
 
 -- ----------------------------
 -- Table structure for user_visited_log
@@ -218,21 +234,5 @@ CREATE TABLE `user_visited_log`  (
 -- Records of user_visited_log
 -- ----------------------------
 INSERT INTO `user_visited_log` VALUES (1, 1, 1);
-
--- ----------------------------
--- Table structure for user_want_log
--- ----------------------------
-DROP TABLE IF EXISTS `user_want_log`;
-CREATE TABLE `user_want_log`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `uid` int(11) DEFAULT NULL COMMENT '用户ID',
-  `bid` int(11) DEFAULT NULL COMMENT '用户收藏的图书ID',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
-
--- ----------------------------
--- Records of user_want_log
--- ----------------------------
-INSERT INTO `user_want_log` VALUES (1, 1, 1);
 
 SET FOREIGN_KEY_CHECKS = 1;
