@@ -17,7 +17,7 @@ const routes = [
     children: [
       {
         path: "index",
-        name:"首页",
+        name: "首页",
         component: () => import("../views/index.vue"),
         meta: {
           thumb: ["首页"],
@@ -25,7 +25,7 @@ const routes = [
       },
       {
         path: "author-list",
-        name:"作者列表",
+        name: "作者列表",
         component: () => import("../views/author/AuthorList.vue"),
         //meta意味着希望为该路由绑定一些自定义数据,这些自定义数据在组件中可以直接访问:通过this.$route.meta.thumb访问该数组
         meta: {
@@ -34,7 +34,7 @@ const routes = [
       },
       {
         path: "author-add",
-        name:"新增作者",
+        name: "新增作者",
         component: () => import("../views/author/AuthorAdd.vue"),
         meta: {
           thumb: ["作者管理", "新增作者"],
@@ -42,7 +42,7 @@ const routes = [
       },
       {
         path: "book-list",
-        name:"图书列表",
+        name: "图书列表",
         component: () => import("../views/book/BookList.vue"),
         meta: {
           thumb: ["图书管理", "图书列表"],
@@ -51,7 +51,7 @@ const routes = [
 
       {
         path: "book-add",
-        name:"新增图书",
+        name: "新增图书",
         component: () => import("../views/book/BookAdd.vue"),
         meta: {
           thumb: ["图书管理", "新增图书"],
@@ -59,7 +59,7 @@ const routes = [
       },
       {
         path: "book-update/:id",
-        name:"修改图书",
+        name: "修改图书",
         component: () => import("../views/book/BookUpdate.vue"),
         meta: {
           thumb: ["图书管理", "修改图书"],
@@ -67,7 +67,7 @@ const routes = [
       },
       {
         path: "bookstore-add",
-        name:"添加书店",
+        name: "添加书店",
         component: () => import("../views/bookstore/BookStoreAdd.vue"),
         meta: {
           thumb: ["书店管理", "添加书店"],
@@ -75,7 +75,7 @@ const routes = [
       },
       {
         path: "bookstore-list",
-        name:"书店列表",
+        name: "书店列表",
         component: () => import("../views/bookstore/BookStoreList.vue"),
         meta: {
           thumb: ["书店管理", "书店列表"],
@@ -83,13 +83,21 @@ const routes = [
       },
       {
         path: "bookstore-update/:id",
-        name:"编辑书店",
+        name: "编辑书店",
         component: () => import("../views/bookstore/BookStoreUpdate.vue"),
         meta: {
           thumb: ["书店管理", "编辑书店"],
         },
       },
-     
+      {
+        path: "user-list",
+        name: "用户列表",
+        component: () => import("../views/user/UserList.vue"),
+        meta: {
+          thumb: ["用户管理", "用户列表"],
+        },
+      },
+
     ],
   },
   {
@@ -114,7 +122,7 @@ router.beforeEach((to, from, next) => {
     if (store.state.admin) {
       next();
     } else {
-      router.push("/admin.login");
+      router.push("/admin/login");
     }
   }
 });

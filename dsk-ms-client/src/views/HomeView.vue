@@ -131,7 +131,7 @@
 
           <!-- <span>{{ admin.username }}</span> -->
         </el-header>
-
+          <!-- 气泡标签 -->
           <tags></tags>
           
         <el-main>
@@ -175,7 +175,7 @@ export default {
         icon: "el-icon-message",
       },
       {
-        type: "sub-memu",
+        type: "sub-menu",
         link: "1",
         title: "作者管理",
         icon: "el-icon-user-solid",
@@ -231,6 +231,20 @@ export default {
             link: "/home/bookstore-add",
             title: "新增书店",
             icon: "el-icon-plus",
+          },
+        ],
+      },
+      {
+        type: "sub-memu",
+        link: "4",
+        title: "用户管理",
+        icon: "el-icon-user",
+        children: [
+          {
+            type: "memu-item",
+            link: "/home/user-list",
+            title: "用户列表",
+            icon: "el-icon-notebook-2",
           },
         ],
       },
