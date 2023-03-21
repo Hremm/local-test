@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkdsk_ms_client"]=self["webpackChunkdsk_ms_client"]||[]).push([[872],{9872:function(n,e,t){t.r(e),t.d(e,{default:function(){return i}});var s=function(){var n=this;n._self._c;return n._m(0)},u=[function(){var n=this,e=n._self._c;return e("div",[e("h1",[n._v("首页")])])}],r={},c=r,l=t(1001),f=(0,l.Z)(c,s,u,!1,null,"af206a4e",null),i=f.exports}}]);
+//# sourceMappingURL=872.1459eb20.js.map

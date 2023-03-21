@@ -7,8 +7,8 @@ const URL_envent = {
   },
   //生产
   PRO: {
-    dskURL: "https://remm.fun/dsk",
-    uploadURL: "https://remm.fun/dskupload",
+    dskURL: "http://120.46.191.127:3060",
+    uploadURL: "http://120.46.191.127:9000",
   },
 };
-export default URL_envent.DEV; //需要哪个环境就导出哪个
+export default URL_envent.PRO; //需要哪个环境就导出哪个
